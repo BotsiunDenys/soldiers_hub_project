@@ -1,0 +1,61 @@
+@use "../../utils/Variables.scss";
+
+.header {
+  .container {
+    max-width: 1462px;
+    height: 60px;
+    padding: 0 15px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .headerLogo {
+      img {
+        width: 100%;
+      }
+    }
+
+    .nav {
+      &List {
+        display: flex;
+        column-gap: 30px;
+      }
+
+      &Item {
+      }
+
+      .navLink {
+      }
+    }
+
+    .headerActions {
+      display: flex;
+      align-items: center;
+
+      .actionContainer {
+        display: flex;
+        column-gap: 10px;
+
+        .action {
+          position: relative;
+          padding: 10px;
+
+          &:first-child::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -5px;
+            transform: translateX(100%);
+            width: 1px;
+            height: 100%;
+            background-color: #000;
+          }
+        }
+      }
+
+      .actionsImg {
+      }
+    }
+  }
+}
