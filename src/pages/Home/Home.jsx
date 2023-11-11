@@ -22,9 +22,9 @@ const Home = () => {
               <img src={donation} />
             </div>
           </div>
-          <div className={styles.introImage}>
+          {/* <div className={styles.introImage}>
             <img src={intro} />
-          </div>
+          </div> */}
         </div>
       </section>
     </main>
