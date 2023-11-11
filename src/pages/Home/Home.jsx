@@ -1,10 +1,13 @@
 import styles from "./Home.module.scss";
+import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
+
 import donation from "../../assets/svg/donation-img.svg";
-import intro from "../../assets/intro-img.png";
+import intro from "../../assets/intro-img.jpg";
+import heart from "../../assets/svg/heart.svg";
 
 const Home = () => {
   return (
-    <main>
+    <main className={styles.main}>
       <section className={styles.intro}>
         <div className={styles.introContainer}>
           <div className={styles.introContent}>
@@ -14,6 +17,7 @@ const Home = () => {
               нашу незалежність та забезпечити нам безпеку. Домопожімо нашим воїнам та покажімо, як
               ми їх цінуємо. Разом ми сила!
             </p>
+            <ButtonGradient img={heart} />
             <div className={styles.introContentImage}>
               <img src={donation} />
             </div>

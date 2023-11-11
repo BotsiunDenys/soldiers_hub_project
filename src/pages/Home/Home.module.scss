@@ -1,1 +1,59 @@
-use 
+@use "../../utils/variables.scss";
+
+.main {
+  background-color: variables.$body-background;
+}
+
+.intro {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.introContainer {
+  max-width: 1462px;
+  padding: 0 15px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  column-gap: 120px;
+
+  // position: relative;
+
+  .introContent {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+
+    clip-path: polygon(0% 0%, 100% 0, 66% 100%, 0% 100%);
+
+    // position: absolute;
+
+    .introTitle {
+      font-size: 52px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1.56px;
+    }
+
+    .introSubtitle {
+      font-size: variables.$subtitles-font-size;
+      max-width: 500px;
+    }
+
+    .introContentImage {
+      margin-top: 40px;
+    }
+  }
+
+  .introImage {
+    // position: relative;
+    // top: 0;
+    // right: -430px;
+
+    clip-path: polygon(33% 0, 100% 0%, 100% 100%, 0% 100%);
+
+    > img {
+      max-width: 100%;
+    }
+  }
+}

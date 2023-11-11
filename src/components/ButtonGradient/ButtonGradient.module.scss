@@ -1,0 +1,29 @@
+@use "../../utils/variables.scss";
+
+.button {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  max-width: fit-content;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: calc(100% * 2);
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, #5ba0bf 0%, #ecc081 50%, #5ba0bf 100%);
+    transition: top 0.3s ease-in-out;
+  }
+
+  &:hover::before {
+    top: -100%;
+  }
+}
