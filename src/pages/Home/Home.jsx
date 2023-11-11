@@ -4,6 +4,7 @@ import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
 import donation from "../../assets/svg/donation-img.svg";
 import intro from "../../assets/intro-img.jpg";
 import heart from "../../assets/svg/heart.svg";
+import soldiers from "../../assets/soldiers.png";
 
 const Home = () => {
   return (
@@ -25,6 +26,19 @@ const Home = () => {
           {/* <div className={styles.introImage}>
             <img src={intro} />
           </div> */}
+        </div>
+      </section>
+      <section className={styles.soldiers}>
+        <div className={styles.soldiersContainer}>
+          <img className={styles.soldiersImg} src={soldiers} />
+        </div>
+      </section>
+      <section className={styles.support}>
+        <div className={styles.supportContainer}>
+          <div>
+            <span></span>
+          </div>
+          <ButtonGradient />
         </div>
       </section>
     </main>
