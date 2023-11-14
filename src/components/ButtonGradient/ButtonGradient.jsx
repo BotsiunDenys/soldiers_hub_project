@@ -14,7 +14,7 @@ const ButtonGradient = ({ button, onClick, text, img, view }) => {
   ) : (
     <Link style={{ fontSize: view?.fz, padding: view?.pading }} className={styles.button} to="fees">
       {!text ? "Підтримати" : text}
-      <img src={img} />
+      <img src={img} style={view?.fz ? { height: "43px" } : null} />
     </Link>
   );
 };
