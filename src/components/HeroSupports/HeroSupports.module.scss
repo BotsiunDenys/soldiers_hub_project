@@ -1,0 +1,35 @@
+.support {
+}
+
+.supportContainer {
+  max-width: 1950px;
+  padding: 0 15px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .textContainer {
+    display: flex;
+    column-gap: 87px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .text {
+      font-size: 96px;
+      line-height: 1.4;
+      font-weight: 700;
+      letter-spacing: 2.88px;
+      text-transform: uppercase;
+      background: -webkit-linear-gradient(#5ba0bf 0%, #ecc081 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    // .img {
+    // }
+  }
+}

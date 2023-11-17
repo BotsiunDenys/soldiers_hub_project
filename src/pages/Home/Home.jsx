@@ -5,7 +5,7 @@ import donation from "../../assets/svg/donation-img.svg";
 import intro from "../../assets/intro-img.jpg";
 import heart from "../../assets/svg/heart.svg";
 import soldiers from "../../assets/soldiers.png";
-import bigHeart from "../../assets/svg/heart-big.svg";
+import HeroSupports from "../../components/HeroSupports/HeroSupports";
 
 const Home = () => {
   return (
@@ -34,19 +34,7 @@ const Home = () => {
           <img className={styles.soldiersImg} src={soldiers} />
         </div>
       </section>
-      <section className={styles.support}>
-        <div className={styles.supportContainer}>
-          <div className={styles.textContainer}>
-            <span className={styles.text}>Підтримай</span>
-            <span className={styles.text}>Наших</span>
-            <span>
-              <img src={bigHeart} alt="big heart img" />
-            </span>
-            <span className={styles.text}>Героїв</span>
-          </div>
-          <ButtonGradient img={heart} view={{ fz: "40px" }} />
-        </div>
-      </section>
+      <HeroSupports />
     </main>
   );
 };
