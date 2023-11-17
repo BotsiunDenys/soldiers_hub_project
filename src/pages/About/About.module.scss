@@ -27,31 +27,10 @@
   }
 }
 
-.spoiler {
-  .spoilerTitle {
-    font-size: 27px;
-    border-bottom: 2px solid black;
-    margin-bottom: 25px;
-  }
+.listItem {
+  margin: 0 0 20px 30px;
 
-  .textContainer {
-    line-height: 24px;
-    display: none;
-    flex-direction: column;
-    row-gap: 25px;
-  }
-
-  .spoilerText {
-  }
-
-  .spoilerList {
-  }
-
-  .listItem {
-    margin: 0 0 20px 30px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+  &:last-child {
+    margin-bottom: 0;
   }
 }

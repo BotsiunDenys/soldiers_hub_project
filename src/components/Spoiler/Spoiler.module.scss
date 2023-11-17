@@ -1,0 +1,19 @@
+.spoiler {
+  .spoilerTitle {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 27px;
+    border-bottom: 2px solid black;
+    margin-bottom: 25px;
+    cursor: pointer;
+  }
+
+  .textContainer {
+    overflow: hidden;
+    line-height: 24px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+  }
+}
