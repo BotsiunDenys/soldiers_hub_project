@@ -1,0 +1,128 @@
+@use "../../utils/variables.scss";
+
+.login {
+  min-height: 100vh;
+  background: url("../../assets/intro-img.jpg") center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 10px;
+}
+
+.loginContainer {
+  max-width: 692px;
+  padding: 25px 35px 70px;
+
+  border-radius: 8px;
+  box-shadow: 0px -5px 50px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 45px;
+
+  .imgContainer {
+    width: 100%;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 3px;
+      width: calc((100% - 133px) / 2);
+      top: 50%;
+      background-color: #fff;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: #fff;
+      height: 3px;
+      width: calc((100% - 133px) / 2);
+      right: 0;
+      top: 50%;
+    }
+
+    img {
+      display: block;
+      width: 133px;
+      aspect-ratio: 1/1;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+  }
+
+  .title {
+    color: #fff;
+    font-size: 35px;
+    font-weight: 700;
+  }
+
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    row-gap: 35px;
+    padding: 0 35px;
+
+    .input {
+      padding: 10px;
+      font-size: 24px;
+      line-height: 20px;
+      color: #fff;
+      width: 100%;
+      background-color: transparent;
+      border: 2px solid #fff;
+      border-radius: 8px;
+
+      &::placeholder {
+        color: inherit;
+      }
+    }
+
+    .checkboxLabel {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      font-size: variables.$small-font;
+      color: #fff;
+    }
+
+    .checkbox {
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: transparent;
+      margin: 0;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #fff;
+      border-radius: 3px;
+      display: grid;
+      place-content: center;
+    }
+
+    .checkbox::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 10px 10px #fff;
+    }
+
+    .checkbox:checked::before {
+      transform: scale(1);
+    }
+  }
+
+  .text {
+    color: #fff;
+    text-align: center;
+    font-size: variables.$subtitles-font-size;
+  }
+}

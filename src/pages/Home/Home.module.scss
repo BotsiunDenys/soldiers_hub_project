@@ -2,15 +2,20 @@
 
 .main {
   background-color: variables.$body-background;
-  display: flex;
-  flex-direction: column;
-  row-gap: 130px;
+  // display: flex;
+  // flex-direction: column;
+  // row-gap: 130px;
   // display: grid;
   // grid-template-rows: repeat(auto-fit, minmax(0fr, 1fr));
+
+  section {
+    margin-bottom: 130px;
+  }
 }
 
 .intro {
-  max-width: 1920px;
+  max-width: 1950px;
+  padding: 0 15px;
   margin: 0 auto;
 
   background: url("../../assets/intro-img2.png") center right / contain no-repeat;
@@ -75,4 +80,10 @@
   max-width: 1462px;
   padding: 0 15px;
   margin: 0 auto;
+
+  .soldiersImg {
+    width: 100%;
+  }
 }
+
+//------------------------

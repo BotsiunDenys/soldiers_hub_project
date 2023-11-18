@@ -5,6 +5,7 @@ import donation from "../../assets/svg/donation-img.svg";
 import intro from "../../assets/intro-img.jpg";
 import heart from "../../assets/svg/heart.svg";
 import soldiers from "../../assets/soldiers.png";
+import HeroSupports from "../../components/HeroSupports/HeroSupports";
 
 const Home = () => {
   return (
@@ -33,14 +34,7 @@ const Home = () => {
           <img className={styles.soldiersImg} src={soldiers} />
         </div>
       </section>
-      <section className={styles.support}>
-        <div className={styles.supportContainer}>
-          <div>
-            <span></span>
-          </div>
-          <ButtonGradient />
-        </div>
-      </section>
+      <HeroSupports />
     </main>
   );
 };

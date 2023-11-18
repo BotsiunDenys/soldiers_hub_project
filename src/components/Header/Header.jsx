@@ -34,8 +34,12 @@ const Header = () => {
         </nav>
         <div className={styles.headerActions}>
           <div className={styles.actionContainer}>
-            <a className={styles.action}>Вхід</a>
-            <a className={styles.action}>Зареєструватися</a>
+            <Link className={styles.action} to="/login">
+              Вхід
+            </Link>
+            <Link className={styles.action} to="/registration">
+              Зареєструватися
+            </Link>
           </div>
           <img src={accountLogo} alt="account logo" className={styles.actionsImg}></img>
         </div>
