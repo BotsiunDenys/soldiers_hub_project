@@ -44,8 +44,8 @@
       .footerMail {
         display: flex;
         flex-direction: column;
-        row-gap: 26px;
-        text-align: right;
+        align-items: flex-end;
+        row-gap: 8px;
 
         .mailTitle {
           font-size: variables.$titles-font-size;
@@ -58,12 +58,17 @@
           column-gap: 7px;
 
           .linkImg {
-            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
             background-color: #363636;
             border-radius: 50%;
 
             > img {
               display: block;
+              max-width: 60%;
             }
           }
         }

@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.scss";
 import logo from "../../assets/svg/logo.svg";
 import mail from "../../assets/svg/mail.svg";
-import { Link } from "react-router-dom";
+import phone from "../../assets/svg/phone.svg";
+import telegram from "../../assets/svg/telegram.svg";
 
 const Footer = () => {
   return (
@@ -45,6 +47,18 @@ const Footer = () => {
               <a href="mailto:soldierssupport@gmail.com">soldierssupport@gmail.com</a>
               <div className={styles.linkImg}>
                 <img src={mail} />
+              </div>
+            </div>
+            <div className={styles.linkContainer}>
+              <p>@Soldiers’Support</p>
+              <div className={styles.linkImg}>
+                <img src={telegram} />
+              </div>
+            </div>
+            <div className={styles.linkContainer}>
+              <p>+380966127710</p>
+              <div className={styles.linkImg}>
+                <img src={phone} />
               </div>
             </div>
           </div>
