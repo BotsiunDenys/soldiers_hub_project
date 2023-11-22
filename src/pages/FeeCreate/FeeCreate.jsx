@@ -52,8 +52,6 @@ const FeeCreate = () => {
     date: undefined,
   });
 
-  console.log(data);
-
   function handleFormSubmit(event) {
     event.preventDefault();
     console.log(data);
