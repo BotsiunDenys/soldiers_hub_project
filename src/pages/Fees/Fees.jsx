@@ -44,6 +44,7 @@ const selectStyles = {
   }),
   menu: (styles) => ({
     ...styles,
+    width: "fit-content",
     borderRadius: "5px",
   }),
   option: (styles, { isFocused, isSelected }) => ({

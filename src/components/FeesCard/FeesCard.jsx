@@ -22,6 +22,7 @@ const FeesCard = ({ title, text, filled, status }) => {
         <p className={styles.text}>{text}</p>
       </div>
       <FeesProgressBar filled={filled} />
+
       <ButtonGradient
         type="button"
         text={status === "closed" && "Переглянути звіт"}

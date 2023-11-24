@@ -1,5 +1,9 @@
 import { useState } from "react";
+import { FaRegCalendarDays } from "react-icons/fa6";
+import Datepicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
+
 import Intro from "../../components/Intro/Intro";
 import styles from "./FeeCreate.module.scss";
 import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
@@ -49,7 +53,7 @@ const FeeCreate = () => {
     feeDescription: "",
     requiredAmount: undefined,
     credentials: undefined,
-    date: undefined,
+    feeEndDate: undefined,
   });
 
   function handleFormSubmit(event) {
@@ -63,6 +67,10 @@ const FeeCreate = () => {
 
   const handleSelectChange = (selectedOption) => {
     setData({ ...data, feeType: selectedOption.value });
+  };
+
+  const handleDateChange = (date) => {
+    setData({ ...data, feeEndDate: date });
   };
 
   return (
@@ -155,6 +163,18 @@ const FeeCreate = () => {
                   onChange={(e) => {
                     handleInputChange(e, "credentials");
                   }}
+                />
+              </label>
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>
+                Кінець збору
+                <Datepicker
+                  selected={data.feeEndDate}
+                  onChange={handleDateChange}
+                  className={styles.datePicker}
+                  placeholderText="Виберіть дату"
+                  shouldCloseOnSelect={true}
                 />
               </label>
             </div>
