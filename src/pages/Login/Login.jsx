@@ -56,7 +56,6 @@ const Login = () => {
                 value={data.remember}
                 onChange={(e) => {
                   handleCheckboxChange(e, "remember");
-                  console.log(e);
                 }}
               />
               Запам'ятати мене
