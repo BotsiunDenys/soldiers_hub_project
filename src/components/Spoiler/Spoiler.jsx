@@ -7,9 +7,11 @@ import arrow from "../../assets/svg/arrow.svg";
 const Spoiler = ({ children, title }) => {
   const [isVisible, setVisible] = useState(false);
 
+  // console.log(isVisible);
+
   return (
     <div className={styles.spoiler}>
-      <h3 className={styles.spoilerTitle} onClick={() => setVisible(!isVisible)}>
+      <h3 className={styles.spoilerTitle} onClick={() => setVisible((param) => !param)}>
         {title}
         <motion.img
           src={arrow}
