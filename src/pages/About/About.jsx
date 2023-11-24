@@ -1,7 +1,7 @@
 import styles from "./About.module.scss";
 
 import HeroSupports from "../../components/HeroSupports/HeroSupports";
-import Spoiler from "../../components/Spoiler/Spoiler";
+import SpoilerAbout from "../../components/SpoilerAbout/SpoilerAbout";
 
 const About = () => {
   return (
@@ -10,7 +10,7 @@ const About = () => {
         <div className={styles.aboutContainer}>
           <h2 className={styles.title}>Soldiers`Support</h2>
           <div className={styles.spoilersContainer}>
-            <Spoiler title="Про нас">
+            <SpoilerAbout title="Про нас">
               <p className={styles.spoilerText}>
                 Soldiers`Support - це не лише платформа, але й спільнота, яка виникла з потреби
                 об'єднати усі благодійні зусилля в єдину базу даних. Наша історія почалася під час
@@ -29,8 +29,8 @@ const About = () => {
                 мету, міг знайти тут свій спосіб допомоги та взаємодії. <br /> Долучайтеся до нас,
                 долучайтеся до змін - разом ми здатні зробити більше!
               </p>
-            </Spoiler>
-            <Spoiler title="Наші цілі">
+            </SpoilerAbout>
+            <SpoilerAbout title="Наші цілі">
               <p className={styles.spoilerText}>
                 Ціль "Soldiers`Support" полягає в тому, щоб створити прозору та динамічну платформу,
                 яка об'єднує та спрощує благодійні зусилля для підтримки тих, хто найбільше потребує
@@ -67,8 +67,8 @@ const About = () => {
                 людей, які об'єднують свої зусилля для досягнення спільної мети — зробити світ
                 кращим місцем через активну благодійність та взаємодію.
               </p>
-            </Spoiler>
-            <Spoiler title="Наші цінності">
+            </SpoilerAbout>
+            <SpoilerAbout title="Наші цінності">
               <p className={styles.spoilerText}>
                 Наші цінності відображають суть та мету нашої платформи «Soldiers`Support»:
               </p>
@@ -98,8 +98,8 @@ const About = () => {
                 Ці цінності лежать в основі наших дій, надаючи платформі "Soldiers' Support"
                 конкретний та значущий характер у галузі благодійності.
               </p>
-            </Spoiler>
-            <Spoiler title="Команда розробників">
+            </SpoilerAbout>
+            <SpoilerAbout title="Команда розробників">
               <p className={styles.spoilerText}>
                 Губчакевич Вадим - Project manager, UI/UX designer, копірайтер
                 <br />
@@ -109,7 +109,7 @@ const About = () => {
                 <br />
                 Гуменюк Крістіна - UI/UX designer, копірайтер
               </p>
-            </Spoiler>
+            </SpoilerAbout>
           </div>
         </div>
       </section>

@@ -1,0 +1,48 @@
+@use "../../utils/variables.scss";
+
+.cardContainer {
+  padding: 20px 25px 10px;
+  background-color: rgba(237, 237, 237, 0.5);
+  border-radius: 8px;
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+  }
+
+  .imgContainer,
+  .imgContainerClosed {
+    position: relative;
+    & > img {
+      width: 100%;
+      aspect-ratio: 1.75/1;
+    }
+  }
+
+  .imgContainerClosed::before {
+    content: "";
+    position: absolute;
+    background:
+      url("../../assets/svg/feeClosed.svg") center no-repeat,
+      rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+  }
+
+  .title {
+    font-size: variables.$titles-font-size;
+    font-weight: 700;
+  }
+
+  .text {
+    font-size: 12px;
+  }
+}
