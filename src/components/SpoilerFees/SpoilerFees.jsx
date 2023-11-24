@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, easeIn, easeInOut, motion } from "framer-motion";
 
-import styles from "./Spoiler.module.scss";
+import styles from "./SpoilerFees.module.scss";
 import arrow from "../../assets/svg/arrow.svg";
 
-const Spoiler = ({ children, title }) => {
+const SpoilerFees = ({ children, title }) => {
   const [isVisible, setVisible] = useState(false);
 
   // console.log(isVisible);
@@ -26,13 +26,12 @@ const Spoiler = ({ children, title }) => {
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            className={styles.textContainer}
+            className={styles.contantContainer}
             animate={{
               height: "auto",
               transition: {
-                type: "spring",
-                bounce: 0.3,
-                duration: 1,
+                duration: 0.75,
+                ease: "easeInOut",
               },
             }}
             initial={{ height: 0 }}
@@ -40,6 +39,7 @@ const Spoiler = ({ children, title }) => {
               height: 0,
               transition: {
                 duration: 0.5,
+                ease: "easeInOut",
               },
             }}
           >
@@ -51,4 +51,4 @@ const Spoiler = ({ children, title }) => {
   );
 };
 
-export default Spoiler;
+export default SpoilerFees;
