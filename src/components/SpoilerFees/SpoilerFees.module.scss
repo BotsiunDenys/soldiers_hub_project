@@ -1,0 +1,20 @@
+@use "../../utils/variables.scss";
+
+.spoiler {
+  background-color: #fff;
+
+  .spoilerTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    font-size: variables.$titles-font-size;
+    font-weight: 700;
+    padding: 5px 30px;
+  }
+}
+
+.contantContainer {
+  overflow: hidden;
+}

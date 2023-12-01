@@ -1,0 +1,71 @@
+@use "../../utils/variables.scss";
+
+.main {
+}
+
+.introTitle {
+  font-size: variables.$big-title-font-size;
+  font-weight: 700;
+  letter-spacing: 1.32px;
+}
+
+.createFee {
+  margin-bottom: 130px;
+}
+
+.createFeeContainer {
+  max-width: 1462px;
+  padding: 60px 15px 0;
+  margin: 0 auto;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 55px;
+
+  .formGroup {
+    width: 60%;
+
+    .text,
+    .input,
+    .datePicker {
+      background-color: transparent;
+      padding: 10px;
+      border: 2px solid #000;
+      border-radius: 8px;
+      font-size: 20px;
+      transition: all 0.2s ease-in-out;
+
+      &:hover,
+      &:focus {
+        border-color: hsl(0, 0%, 70%);
+      }
+    }
+
+    .datePicker {
+      cursor: pointer;
+    }
+
+    .label {
+      font-size: variables.$subtitles-font-size;
+
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+    }
+
+    .text {
+      resize: none;
+    }
+  }
+
+  input[type="number"]:hover::-webkit-inner-spin-button,
+  input[type="number"]:hover::-webkit-outer-spin-button,
+  input[type="number"]:focus::-webkit-inner-spin-button,
+  input[type="number"]:focus::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

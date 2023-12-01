@@ -1,0 +1,61 @@
+@use "../../utils/variables.scss" as *;
+
+.wrapper {
+  display: flex;
+  justify-content: stretch;
+  margin: 15px 10px;
+  background-color: white;
+  border-radius: 6px;
+  max-width: 850px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 25px;
+  max-width: 400px;
+  background-color: rgba(237, 237, 237, 0.5);
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.25);
+  .image {
+    width: 350px;
+    height: 200px;
+  }
+  .name {
+    font-size: $titles-font-size;
+  }
+  .description {
+    font-size: $subtitles-font-size;
+  }
+  .sum {
+    font-size: $main-fonts-size;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+  height: inherit;
+  padding: 20px 25px;
+  .label {
+    font-size: $main-fonts-size;
+    color: #676a61;
+  }
+  .text {
+    color: black;
+  }
+  .buttonsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+  .textContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+  }
+}
