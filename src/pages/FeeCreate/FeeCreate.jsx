@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaRegCalendarDays } from "react-icons/fa6";
 import Datepicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
@@ -54,6 +53,7 @@ const FeeCreate = () => {
     requiredAmount: undefined,
     credentials: undefined,
     feeEndDate: undefined,
+    image: undefined,
   });
 
   function handleFormSubmit(event) {
@@ -71,6 +71,15 @@ const FeeCreate = () => {
 
   const handleDateChange = (date) => {
     setData({ ...data, feeEndDate: date });
+  };
+
+  const handleImageChange = (img) => {
+    setData({ ...data, image: img });
+  };
+
+  const handleCreateImageUrl = (img) => {
+    const photo = URL.createObjectURL(img);
+    handleImageChange(photo);
   };
 
   return (
@@ -177,6 +186,20 @@ const FeeCreate = () => {
                   shouldCloseOnSelect={true}
                 />
               </label>
+            </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="filePicker" className={styles.label}>
+                Фото збору
+                <input
+                  type="file"
+                  name="filePicker"
+                  id="filePicker"
+                  onChange={(e) => {
+                    handleCreateImageUrl(e.target.files[0]);
+                  }}
+                />
+              </label>
+              {data.image && <img src={data.image} />}
             </div>
             <ButtonGradient
               type="submit"
