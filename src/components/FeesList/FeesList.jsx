@@ -27,8 +27,9 @@ const data = [
 const FeesList = ({ status }) => {
   return (
     <div className={styles.listContainer}>
-      {data.map((element) => (
+      {data.map((element, index) => (
         <FeesCard
+          key={index}
           title={element.title}
           text={element.text}
           filled={element.filled}

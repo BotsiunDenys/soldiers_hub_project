@@ -1,8 +1,5 @@
 @use "../../utils/variables.scss";
 
-.main {
-}
-
 .introTitle {
   font-size: variables.$big-title-font-size;
   font-weight: 700;
@@ -68,4 +65,11 @@
     -webkit-appearance: none;
     margin: 0;
   }
+}
+
+.error {
+  font-size: 18px;
+  text-align: center;
+  font-weight: 500;
+  color: rgb(231, 66, 66);
 }

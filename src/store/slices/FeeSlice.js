@@ -105,7 +105,6 @@ const FeesSlice = createSlice({
       state.error = "";
     });
     builder.addCase(createApplication.fulfilled, (state, action) => {
-      state.applications = state.applications.concat(action.payload);
       state.loading = false;
     });
     builder.addCase(createApplication.rejected, (state, action) => {

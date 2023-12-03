@@ -1,66 +1,16 @@
-import img from "../../assets/intro-img.jpg";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AdminFeeDetail from "../../components/AdminFeeDetail/AdminFeeDetail";
 import styles from "./AdminPanel.module.scss";
-
-const data = [
-  {
-    image: img,
-    name: "Назва",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    sum: 20000,
-    username: "Степан Дмитрович",
-    feeType: "Військовий",
-    email: "sobaka@gmail.com",
-    date: "35 днів",
-  },
-  {
-    image: img,
-    name: "Назва",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    sum: 20000,
-    username: "Степан Дмитрович",
-    feeType: "Військовий",
-    email: "sobaka@gmail.com",
-    date: "35 днів",
-  },
-  {
-    image: img,
-    name: "Назва",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    sum: 20000,
-    username: "Степан Дмитрович",
-    feeType: "Військовий",
-    email: "sobaka@gmail.com",
-    date: "35 днів",
-  },
-  {
-    image: img,
-    name: "Назва",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    sum: 20000,
-    username: "Степан Дмитрович",
-    feeType: "Військовий",
-    email: "sobaka@gmail.com",
-    date: "35 днів",
-  },
-  {
-    image: img,
-    name: "Назва",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    sum: 20000,
-    username: "Степан Дмитрович",
-    feeType: "Військовий",
-    email: "sobaka@gmail.com",
-    date: "35 днів",
-  },
-];
+import { getApplications } from "../../store/slices/FeeSlice";
 
 const AdminPanel = () => {
+  const data = useSelector((state) => state.fees.applications);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getApplications());
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <section className={styles.requests}>
