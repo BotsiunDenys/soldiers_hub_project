@@ -11,8 +11,8 @@ export class AuthService {
     return data;
   }
 
-  static async registration({ login, password }) {
-    const data = await api.post("auth/registration", { login, password });
+  static async registration({ login, password, isAdmin }) {
+    const data = await api.post("auth/registration", { login, password, isAdmin });
     return data;
   }
 

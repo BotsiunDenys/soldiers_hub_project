@@ -12,7 +12,7 @@ const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogged = useSelector((state) => state.auth.isLogged);
-  const [data, setData] = useState({ login: "", password: "", repeatPassword: "" });
+  const [data, setData] = useState({ login: "", password: "", repeatPassword: "", isAdmin: false });
 
   useEffect(() => {
     if (isLogged) {
