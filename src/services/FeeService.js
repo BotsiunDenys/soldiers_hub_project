@@ -11,6 +11,21 @@ export class FeeService {
     return data;
   }
 
+  static async getMilitaryFees() {
+    const data = await api.get("fee/getMilitaryFees");
+    return data;
+  }
+
+  static async getVolunteersFees() {
+    const data = await api.get("fee/getVolunteersFees");
+    return data;
+  }
+
+  static async getRebuildingFees() {
+    const data = await api.get("fee/getRebuildingFees");
+    return data;
+  }
+
   static async acceptApplication(id) {
     const data = await api.put(`fee/acceptApplication/${id}`);
     return data;

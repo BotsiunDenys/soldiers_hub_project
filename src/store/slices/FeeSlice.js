@@ -3,6 +3,9 @@ import { FeeService } from "../../services/FeeService";
 
 const initalFeesState = {
   fees: [],
+  volunteersFees: [],
+  rebuildingFees: [],
+  militaryFees: [],
   applications: [],
   error: "",
   loading: false,
@@ -30,6 +33,21 @@ export const refuseApplication = createAsyncThunk("fees/refuseApplication", asyn
 
 export const createApplication = createAsyncThunk("fees/createApplication", async (application) => {
   const response = await FeeService.createApplication(application);
+  return response.data;
+});
+
+export const getVolunteersFees = createAsyncThunk("fees/getVolunteersFees", async () => {
+  const response = await FeeService.getVolunteersFees();
+  return response.data;
+});
+
+export const getMilitaryFees = createAsyncThunk("fees/getMilitaryFees", async () => {
+  const response = await FeeService.getMilitaryFees();
+  return response.data;
+});
+
+export const getRebuildingFees = createAsyncThunk("fees/getRebuildingFees", async () => {
+  const response = await FeeService.getRebuildingFees();
   return response.data;
 });
 
@@ -108,6 +126,51 @@ const FeesSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(createApplication.rejected, (state, action) => {
+      state.loading = false;
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+    });
+    builder.addCase(getVolunteersFees.pending, (state) => {
+      state.loading = true;
+      state.volunteersFees = [];
+      state.error = "";
+    });
+    builder.addCase(getVolunteersFees.fulfilled, (state, action) => {
+      state.loading = false;
+      state.volunteersFees = action.payload;
+    });
+    builder.addCase(getVolunteersFees.rejected, (state, action) => {
+      state.loading = false;
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+    });
+    builder.addCase(getRebuildingFees.pending, (state) => {
+      state.loading = true;
+      state.rebuildingFees = [];
+      state.error = "";
+    });
+    builder.addCase(getRebuildingFees.fulfilled, (state, action) => {
+      state.loading = false;
+      state.rebuildingFees = action.payload;
+    });
+    builder.addCase(getRebuildingFees.rejected, (state, action) => {
+      state.loading = false;
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+    });
+    builder.addCase(getMilitaryFees.pending, (state) => {
+      state.loading = true;
+      state.militaryFees = [];
+      state.error = "";
+    });
+    builder.addCase(getMilitaryFees.fulfilled, (state, action) => {
+      state.loading = false;
+      state.militaryFees = action.payload;
+    });
+    builder.addCase(getMilitaryFees.rejected, (state, action) => {
       state.loading = false;
       if (action.error.message) {
         state.error = action.error.message;
