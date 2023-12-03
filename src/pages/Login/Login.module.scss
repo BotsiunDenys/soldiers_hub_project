@@ -84,40 +84,40 @@
       }
     }
 
-    .checkboxLabel {
-      display: flex;
-      align-items: center;
-      column-gap: 5px;
-      font-size: variables.$small-font;
-      color: #fff;
-    }
+    // .checkboxLabel {
+    //   display: flex;
+    //   align-items: center;
+    //   column-gap: 5px;
+    //   font-size: variables.$small-font;
+    //   color: #fff;
+    // }
 
-    .checkbox {
-      -webkit-appearance: none;
-      appearance: none;
-      background-color: transparent;
-      margin: 0;
-      cursor: pointer;
-      width: 18px;
-      height: 18px;
-      border: 2px solid #fff;
-      border-radius: 3px;
-      display: grid;
-      place-content: center;
-    }
+    // .checkbox {
+    //   -webkit-appearance: none;
+    //   appearance: none;
+    //   background-color: transparent;
+    //   margin: 0;
+    //   cursor: pointer;
+    //   width: 18px;
+    //   height: 18px;
+    //   border: 2px solid #fff;
+    //   border-radius: 3px;
+    //   display: grid;
+    //   place-content: center;
+    // }
 
-    .checkbox::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      transform: scale(0);
-      transition: 120ms transform ease-in-out;
-      box-shadow: inset 10px 10px #fff;
-    }
+    // .checkbox::before {
+    //   content: "";
+    //   width: 10px;
+    //   height: 10px;
+    //   transform: scale(0);
+    //   transition: 120ms transform ease-in-out;
+    //   box-shadow: inset 10px 10px #fff;
+    // }
 
-    .checkbox:checked::before {
-      transform: scale(1);
-    }
+    // .checkbox:checked::before {
+    //   transform: scale(1);
+    // }
   }
 
   .text {

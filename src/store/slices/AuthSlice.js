@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AuthService } from "../../services/AuthService";
 
 const initialAuthState = {
+  user: "",
   isLogged: false,
   loading: false,
   error: "",
@@ -12,7 +13,7 @@ export const login = createAsyncThunk("auth/login", async ({ login, password }) 
   return response.data;
 });
 
-export const logout = createAsyncThunk("auth/logout", async ({ refreshToken }) => {
+export const logout = createAsyncThunk("auth/logout", async () => {
   const response = await AuthService.logout({ refreshToken });
   return response.data;
 });
@@ -36,7 +37,8 @@ const AuthSlice = createSlice({
       state.isLogged = false;
       state.loading = true;
     });
-    builder.addCase(login.fulfilled, (state) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.user = action.payload.user.login;
       state.isLogged = true;
       state.loading = false;
     });
@@ -52,6 +54,7 @@ const AuthSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(logout.fulfilled, (state) => {
+      state.user = "";
       state.isLogged = false;
       state.loading = false;
     });
@@ -66,7 +69,8 @@ const AuthSlice = createSlice({
       state.isLogged = false;
       state.loading = true;
     });
-    builder.addCase(registration.fulfilled, (state) => {
+    builder.addCase(registration.fulfilled, (state, action) => {
+      state.user = action.payload.user.login;
       state.isLogged = true;
       state.loading = false;
     });
