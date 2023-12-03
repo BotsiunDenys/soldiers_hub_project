@@ -7,7 +7,7 @@ export class AuthService {
   }
 
   static async logout() {
-    const data = await api.post("auth/logout", { refreshToken });
+    const data = await api.post("auth/logout");
     return data;
   }
 
@@ -16,8 +16,8 @@ export class AuthService {
     return data;
   }
 
-  static async checkAuth({ refreshToken }) {
-    const data = await api.get("auth/login", { refreshToken });
+  static async checkAuth() {
+    const data = await api.get("auth/refresh");
     return data;
   }
 }
