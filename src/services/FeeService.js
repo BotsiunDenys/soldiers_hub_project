@@ -2,7 +2,11 @@ import api from "../api/api";
 
 export class FeeService {
   static async getApplications() {
-    const data = await api.get("fee/applications");
+    const data = await api.get("fee/applications", {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return data;
   }
 

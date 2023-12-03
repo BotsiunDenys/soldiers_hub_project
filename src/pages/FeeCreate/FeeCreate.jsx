@@ -90,6 +90,7 @@ const FeeCreate = () => {
           requisite: data.credentials,
           finish: data.feeEndDate,
           isAccepted: false,
+          image: data.image,
         };
         const send = async () => {
           await dispatch(createApplication(application));
@@ -123,15 +124,6 @@ const FeeCreate = () => {
 
   const handleDateChange = (date) => {
     setData({ ...data, feeEndDate: date });
-  };
-
-  const handleImageChange = (img) => {
-    setData({ ...data, image: img });
-  };
-
-  const handleCreateImageUrl = (img) => {
-    const photo = URL.createObjectURL(img);
-    handleImageChange(photo);
   };
 
   return (
@@ -228,30 +220,32 @@ const FeeCreate = () => {
               </label>
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.label}>
+              <label htmlFor="datePicker" className={styles.label}>
                 Кінець збору
-                <Datepicker
-                  selected={data.feeEndDate}
-                  onChange={handleDateChange}
-                  className={styles.datePicker}
-                  placeholderText="Виберіть дату"
-                  shouldCloseOnSelect={true}
-                />
               </label>
+              <Datepicker
+                id="datePicker"
+                selected={data.feeEndDate}
+                onChange={handleDateChange}
+                className={styles.datePicker}
+                placeholderText="Виберіть дату"
+                shouldCloseOnSelect={true}
+              />
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="filePicker" className={styles.label}>
                 Фото збору
                 <input
-                  type="file"
+                  type="text"
+                  className={styles.input}
+                  placeholder="Посилання на фото"
                   name="filePicker"
                   id="filePicker"
                   onChange={(e) => {
-                    handleCreateImageUrl(e.target.files[0]);
+                    handleInputChange(e, "image");
                   }}
                 />
               </label>
-              {data.image && <img src={data.image} />}
             </div>
             {error && <p className={styles.error}>Сталась помилка. Спробуйте пізніше!</p>}
             {loading && <Loader />}
