@@ -5,6 +5,7 @@ import { API_URL } from "../../api/api";
 
 const initialAuthState = {
   user: "",
+  isAdmin: false,
   isLogged: false,
   loading: false,
   error: "",
@@ -23,10 +24,13 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   return response.data;
 });
 
-export const registration = createAsyncThunk("auth/registration", async ({ login, password }) => {
-  const response = await AuthService.registration({ login, password });
-  return response.data;
-});
+export const registration = createAsyncThunk(
+  "auth/registration",
+  async ({ login, password, isAdmin }) => {
+    const response = await AuthService.registration({ login, password, isAdmin });
+    return response.data;
+  },
+);
 
 export const checkAuth = createAsyncThunk("auth/checkAuth", async () => {
   const response = await axios.get(`${API_URL}auth/refresh`, { withCredentials: true });
@@ -46,6 +50,7 @@ const AuthSlice = createSlice({
     });
     builder.addCase(login.fulfilled, (state, action) => {
       state.user = action.payload.user.login;
+      state.isAdmin = action.payload.user.isAdmin;
       state.isLogged = true;
       state.loading = false;
     });
@@ -94,6 +99,7 @@ const AuthSlice = createSlice({
     });
     builder.addCase(checkAuth.fulfilled, (state, action) => {
       state.user = action.payload.user.login;
+      state.isAdmin = action.payload.user.isAdmin;
       state.isLogged = true;
       state.loading = false;
     });
