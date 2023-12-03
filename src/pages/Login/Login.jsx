@@ -20,7 +20,7 @@ const Login = () => {
     }
   }, [isLogged]);
 
-  async function handleFormSubmit(event) {
+  function handleFormSubmit(event) {
     event.preventDefault();
     dispatch(login(data));
   }
@@ -60,7 +60,7 @@ const Login = () => {
                 handleInputChange(e, "password");
               }}
             />
-            <label className={styles.checkboxLabel}>
+            {/* <label className={styles.checkboxLabel}>
               <input
                 type="checkbox"
                 className={styles.checkbox}
@@ -70,7 +70,7 @@ const Login = () => {
                 }}
               />
               Запам'ятати мене
-            </label>
+            </label> */}
             <ButtonGradient
               type="submit"
               img={heart}

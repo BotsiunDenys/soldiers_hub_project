@@ -6,7 +6,7 @@ export class AuthService {
     return data;
   }
 
-  static async logout({ refreshToken }) {
+  static async logout() {
     const data = await api.post("auth/logout", { refreshToken });
     return data;
   }
