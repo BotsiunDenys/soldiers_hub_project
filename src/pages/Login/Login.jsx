@@ -1,17 +1,28 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../store/slices/AuthSlice";
 import styles from "./Login.module.scss";
-import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
 
+import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
 import account from "../../assets/svg/big-account.svg";
-import { Link } from "react-router-dom";
 import heart from "../../assets/svg/heart.svg";
-import { useState } from "react";
 
 const Login = () => {
-  const [data, setData] = useState({ username: "", password: "", remember: false });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogged = useSelector((state) => state.auth.isLogged);
+  const [data, setData] = useState({ login: "", password: "", remember: false });
 
-  function handleFormSubmit(event) {
+  useEffect(() => {
+    if (isLogged) {
+      navigate("/");
+    }
+  }, [isLogged]);
+
+  async function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(data);
+    dispatch(login(data));
   }
 
   function handleInputChange(e, name) {
@@ -35,9 +46,9 @@ const Login = () => {
               type="text"
               placeholder="Логін"
               className={styles.input}
-              value={data.username}
+              value={data.login}
               onChange={(e) => {
-                handleInputChange(e, "username");
+                handleInputChange(e, "login");
               }}
             />
             <input

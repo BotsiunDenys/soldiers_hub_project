@@ -1,17 +1,28 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registration } from "../../store/slices/AuthSlice";
+
 import styles from "./Registration.module.scss";
 import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
-
 import account from "../../assets/svg/big-account.svg";
-import { Link } from "react-router-dom";
 import heart from "../../assets/svg/heart.svg";
-import { useState } from "react";
 
 const Registration = () => {
-  const [data, setData] = useState({ username: "", password: "", repeatPassword: "" });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogged = useSelector((state) => state.auth.isLogged);
+  const [data, setData] = useState({ login: "", password: "", repeatPassword: "" });
+
+  useEffect(() => {
+    if (isLogged) {
+      navigate("/");
+    }
+  }, [isLogged]);
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(data);
+    dispatch(registration(data));
   }
 
   function handleInputChange(e, name) {
@@ -31,9 +42,9 @@ const Registration = () => {
               type="text"
               placeholder="Логін"
               className={styles.input}
-              value={data.username}
+              value={data.login}
               onChange={(e) => {
-                handleInputChange(e, "username");
+                handleInputChange(e, "login");
               }}
             />
             <input
