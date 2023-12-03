@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 
 import styles from "./Fees.module.scss";
@@ -7,6 +7,8 @@ import Intro from "../../components/Intro/Intro";
 import SpoilerFees from "../../components/SpoilerFees/SpoilerFees";
 import heart from "../../assets/svg/heart.svg";
 import FeesList from "../../components/FeesList/FeesList";
+import { useDispatch, useSelector } from "react-redux";
+import { getFees } from "../../store/slices/FeeSlice";
 
 const options = [
   { value: "military", label: "Військовий" },
@@ -69,10 +71,16 @@ const selectStyles = {
 
 const Fees = () => {
   const [feeType, setFeeType] = useState("");
+  const dispatch = useDispatch();
+  const fees = useSelector((state) => state.fees.fees);
 
   const handleSelectChange = (selectedOption) => {
     setFeeType(selectedOption.value);
   };
+
+  useEffect(() => {
+    dispatch(getFees());
+  }, []);
 
   return (
     <main className={styles.main}>

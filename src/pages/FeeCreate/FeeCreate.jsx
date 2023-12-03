@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Datepicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
@@ -6,14 +7,19 @@ import Select from "react-select";
 import Intro from "../../components/Intro/Intro";
 import styles from "./FeeCreate.module.scss";
 import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
+import Loader from "../../components/Loader/Loader";
 
 import img from "../../assets/svg/heart.svg";
+import { createApplication } from "../../store/slices/FeeSlice";
+import { useNavigate } from "react-router-dom";
 
 const options = [
   { value: "military", label: "Військовий" },
   { value: "volunteer", label: "Волонтерський" },
   { value: "rebuild", label: "На відбудову" },
 ];
+
+const validateEmailRegex = /^\S+@\S+\.\S+$/;
 
 const selectStyles = {
   control: (styles, { menuIsOpen }) => ({
@@ -50,15 +56,61 @@ const FeeCreate = () => {
     feeType: "",
     feeName: "",
     feeDescription: "",
-    requiredAmount: undefined,
-    credentials: undefined,
-    feeEndDate: undefined,
-    image: undefined,
+    requiredAmount: 0,
+    credentials: "",
+    feeEndDate: "",
+    image: "",
   });
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loading = useSelector((state) => state.fees.loading);
+  const error = useSelector((state) => state.fees.error);
+  const isLogged = useSelector((state) => state.auth.isLogged);
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(data);
+    if (isLogged) {
+      if (
+        validateEmailRegex.test(data.mail) &&
+        data.feeType &&
+        data.feeName &&
+        data.feeDescription.length <= 300 &&
+        data.feeDescription &&
+        data.requiredAmount &&
+        data.credentials &&
+        data.feeEndDate
+      ) {
+        const application = {
+          email: data.mail,
+          type: data.feeType,
+          name: data.feeName,
+          description: data.feeDescription,
+          sum: data.requiredAmount,
+          requisite: data.credentials,
+          finish: data.feeEndDate,
+          isAccepted: false,
+        };
+        const send = async () => {
+          await dispatch(createApplication(application));
+          if (!error) {
+            setData({
+              mail: "",
+              feeType: "",
+              feeName: "",
+              feeDescription: "",
+              requiredAmount: 0,
+              credentials: "",
+              feeEndDate: "",
+              image: "",
+            });
+          }
+        };
+        send();
+      }
+    } else {
+      navigate("/login");
+    }
   }
 
   function handleInputChange(e, name) {
@@ -66,7 +118,7 @@ const FeeCreate = () => {
   }
 
   const handleSelectChange = (selectedOption) => {
-    setData({ ...data, feeType: selectedOption.value });
+    setData({ ...data, feeType: selectedOption.label });
   };
 
   const handleDateChange = (date) => {
@@ -165,7 +217,7 @@ const FeeCreate = () => {
               <label className={styles.label}>
                 Реквізити
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Введіть номер банківської картки"
                   className={styles.input}
                   value={data.credentials}
@@ -201,6 +253,8 @@ const FeeCreate = () => {
               </label>
               {data.image && <img src={data.image} />}
             </div>
+            {error && <p className={styles.error}>Сталась помилка. Спробуйте пізніше!</p>}
+            {loading && <Loader />}
             <ButtonGradient
               type="submit"
               img={img}
