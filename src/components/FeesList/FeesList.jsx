@@ -32,7 +32,7 @@ const data = [
   },
 ];
 
-const FeesList = ({ status, feeType }) => {
+const FeesList = ({ status, feeType, setModalVisible, setCurrentFee }) => {
   const dispatch = useDispatch();
   const {
     fees,
@@ -74,21 +74,27 @@ const FeesList = ({ status, feeType }) => {
         ? allFees[`${feeType}Fees`].map((element, index) => (
             <FeesCard
               key={index}
-              title={element.name}
-              text={element.description}
-              sum={element.sum}
-              img={element?.image}
+              data={element}
+              // title={element.name}
+              // text={element.description}
+              // sum={element.sum}
+              // img={element?.image}
               status={status}
+              setCurrentFee={setCurrentFee}
+              setModalVisible={setModalVisible}
             />
           ))
         : allFees.fees.map((element, index) => (
             <FeesCard
               key={index}
-              title={element.name}
-              text={element.description}
-              sum={element.sum}
-              img={element?.image}
+              data={element}
+              // title={element.name}
+              // text={element.description}
+              // sum={element.sum}
+              // img={element?.image}
               status={status}
+              setCurrentFee={setCurrentFee}
+              setModalVisible={setModalVisible}
             />
           ))}
     </div>

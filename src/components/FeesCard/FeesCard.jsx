@@ -3,9 +3,9 @@ import styles from "./FeesCard.module.scss";
 import feeActive from "../../assets/svg/donation-heart.svg";
 import feeClosed from "../../assets/svg/heart.svg";
 import test from "../../assets/test.jpg";
-import FeesProgressBar from "../FeesProgressBar/FeesProgressBar";
+import ModalWindow from "../modalWindow/modalWindow";
 
-const FeesCard = ({ title, text, sum, status, img }) => {
+const FeesCard = ({ data, status, setModalVisible, setCurrentFee }) => {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.content}>
@@ -16,12 +16,12 @@ const FeesCard = ({ title, text, sum, status, img }) => {
               : status === "closed" && styles.imgContainerClosed
           }
         >
-          <img src={img ? img : test} />
+          <img src={data.image ? data.image : test} />
         </div>
-        <h3 className={styles.title}>{title}</h3>
-        <p className={styles.text}>{text}</p>
+        <h3 className={styles.title}>{data.name}</h3>
+        <p className={styles.text}>{data.description}</p>
       </div>
-      <p>Сума збору: {sum} грн</p>
+      <p>Сума збору: {data.sum} грн</p>
 
       {status === "active" && (
         <ButtonGradient
@@ -29,6 +29,10 @@ const FeesCard = ({ title, text, sum, status, img }) => {
           text={status === "closed" && "Переглянути звіт"}
           img={status === "active" ? feeActive : status === "closed" && feeClosed}
           view={{ pading: "10px 40px" }}
+          onClick={() => {
+            setCurrentFee(data);
+            setModalVisible(true);
+          }}
         />
       )}
     </div>
