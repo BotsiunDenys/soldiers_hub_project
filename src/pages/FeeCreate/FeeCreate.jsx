@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Datepicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 
 import Intro from "../../components/Intro/Intro";
@@ -12,6 +10,7 @@ import Loader from "../../components/Loader/Loader";
 import img from "../../assets/svg/heart.svg";
 import { createApplication } from "../../store/slices/FeeSlice";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "../../components/DatePicker/DatePicker";
 
 const options = [
   { value: "military", label: "Військовий" },
@@ -58,10 +57,9 @@ const FeeCreate = () => {
     feeDescription: "",
     requiredAmount: 0,
     credentials: "",
-    feeEndDate: "",
     image: "",
   });
-
+  const [date, setDate] = useState(new Date());
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loading = useSelector((state) => state.fees.loading);
@@ -79,7 +77,7 @@ const FeeCreate = () => {
         data.feeDescription &&
         data.requiredAmount &&
         data.credentials &&
-        data.feeEndDate
+        date !== new Date()
       ) {
         const application = {
           email: data.mail,
@@ -88,7 +86,7 @@ const FeeCreate = () => {
           description: data.feeDescription,
           sum: data.requiredAmount,
           requisite: data.credentials,
-          finish: data.feeEndDate,
+          finish: date,
           isAccepted: false,
           image: data.image,
         };
@@ -102,7 +100,6 @@ const FeeCreate = () => {
               feeDescription: "",
               requiredAmount: 0,
               credentials: "",
-              feeEndDate: "",
               image: "",
             });
           }
@@ -122,8 +119,11 @@ const FeeCreate = () => {
     setData({ ...data, feeType: selectedOption.label });
   };
 
-  const handleDateChange = (date) => {
-    setData({ ...data, feeEndDate: date });
+  const handleDateChange = (dateValue) => {
+    const year = String(dateValue.getFullYear());
+    const month = String(dateValue.getMonth() + 1).padStart(2, "0");
+    const day = String(dateValue.getDate()).padStart(2, "0");
+    setDate(`${day}/${month}/${year}`);
   };
 
   return (
@@ -220,17 +220,8 @@ const FeeCreate = () => {
               </label>
             </div>
             <div className={styles.formGroup}>
-              <label htmlFor="datePicker" className={styles.label}>
-                Кінець збору
-              </label>
-              <Datepicker
-                id="datePicker"
-                selected={data.feeEndDate}
-                onChange={handleDateChange}
-                className={styles.datePicker}
-                placeholderText="Виберіть дату"
-                shouldCloseOnSelect={true}
-              />
+              <label className={styles.label}>Кінець збору</label>
+              <DatePicker dateHandle={handleDateChange} />
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="filePicker" className={styles.label}>
