@@ -65,7 +65,7 @@ const FeeCreate = () => {
   const loading = useSelector((state) => state.fees.loading);
   const error = useSelector((state) => state.fees.error);
   const isLogged = useSelector((state) => state.auth.isLogged);
-
+  console.log(error);
   function handleFormSubmit(event) {
     event.preventDefault();
     if (isLogged) {

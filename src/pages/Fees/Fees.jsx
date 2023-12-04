@@ -1,12 +1,5 @@
 import { useState } from "react";
 import Select from "react-select";
-
-import styles from "./Fees.module.scss";
-import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
-import Intro from "../../components/Intro/Intro";
-import SpoilerFees from "../../components/SpoilerFees/SpoilerFees";
-import heart from "../../assets/svg/heart.svg";
-import FeesList from "../../components/FeesList/FeesList";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getFees,
@@ -14,6 +7,14 @@ import {
   getVolunteersFees,
   getRebuildingFees,
 } from "../../store/slices/FeeSlice";
+
+import styles from "./Fees.module.scss";
+import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
+import Intro from "../../components/Intro/Intro";
+import SpoilerFees from "../../components/SpoilerFees/SpoilerFees";
+import FeesList from "../../components/FeesList/FeesList";
+import ModalWindow from "../../components/modalWindow/modalWindow";
+import heart from "../../assets/svg/heart.svg";
 
 const options = [
   { value: "military", label: "Військовий" },
@@ -81,6 +82,8 @@ const Fees = () => {
   const militaryFees = useSelector((state) => state.fees.militaryFees);
   const volutneersFees = useSelector((state) => state.fees.volutneersFees);
   const rebuildingFees = useSelector((state) => state.fees.rebuildingFees);
+  const [isVisible, setIsVisible] = useState(false);
+  const [currentFee, setCurrentFee] = useState({});
 
   const handleSelectChange = (selectedOption) => {
     setFeeType(selectedOption.value);
@@ -133,11 +136,22 @@ const Fees = () => {
             />
           </div>
           <SpoilerFees title="Активні">
-            <FeesList status="active" feeType={feeType} />
+            <FeesList
+              status="active"
+              feeType={feeType}
+              setModalVisible={setIsVisible}
+              setCurrentFee={setCurrentFee}
+            />
           </SpoilerFees>
           <SpoilerFees title="Закриті">
-            <FeesList status="closed" feeType={feeType} />
+            <FeesList
+              status="closed"
+              feeType={feeType}
+              setModalVisible={setIsVisible}
+              setCurrentFee={setCurrentFee}
+            />
           </SpoilerFees>
+          <ModalWindow isVisible={isVisible} setIsVisible={setIsVisible} currentFee={currentFee} />
         </div>
       </section>
     </main>
