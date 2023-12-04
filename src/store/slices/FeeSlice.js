@@ -7,6 +7,7 @@ const initalFeesState = {
   rebuildingFees: [],
   militaryFees: [],
   applications: [],
+  creationSuccess: false,
   error: "",
   loading: false,
 };
@@ -120,9 +121,11 @@ const FeesSlice = createSlice({
     });
     builder.addCase(createApplication.pending, (state) => {
       state.loading = true;
+      state.creationSuccess = false;
       state.error = "";
     });
-    builder.addCase(createApplication.fulfilled, (state, action) => {
+    builder.addCase(createApplication.fulfilled, (state) => {
+      state.creationSuccess = true;
       state.loading = false;
     });
     builder.addCase(createApplication.rejected, (state, action) => {
