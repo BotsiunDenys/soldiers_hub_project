@@ -1,4 +1,4 @@
-@use "../../utils/Variables.scss";
+@use "../../utils/variables.scss" as *;
 
 .header {
   background-color: #fff;
@@ -22,12 +22,6 @@
       &List {
         display: flex;
         column-gap: 30px;
-      }
-
-      &Item {
-      }
-
-      .navLink {
       }
     }
 

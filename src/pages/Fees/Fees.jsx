@@ -13,7 +13,7 @@ import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
 import Intro from "../../components/Intro/Intro";
 import SpoilerFees from "../../components/SpoilerFees/SpoilerFees";
 import FeesList from "../../components/FeesList/FeesList";
-import ModalWindow from "../../components/modalWindow/modalWindow";
+import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import heart from "../../assets/svg/heart.svg";
 
 const options = [
