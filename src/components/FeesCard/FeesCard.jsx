@@ -5,7 +5,7 @@ import feeClosed from "../../assets/svg/heart.svg";
 import test from "../../assets/test.jpg";
 import FeesProgressBar from "../FeesProgressBar/FeesProgressBar";
 
-const FeesCard = ({ title, text, filled, status }) => {
+const FeesCard = ({ title, text, sum, status, img }) => {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.content}>
@@ -16,19 +16,21 @@ const FeesCard = ({ title, text, filled, status }) => {
               : status === "closed" && styles.imgContainerClosed
           }
         >
-          <img src={test} />
+          <img src={img ? img : test} />
         </div>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.text}>{text}</p>
       </div>
-      <FeesProgressBar filled={filled} />
+      <p>Сума збору: {sum} грн</p>
 
-      <ButtonGradient
-        type="button"
-        text={status === "closed" && "Переглянути звіт"}
-        img={status === "active" ? feeActive : status === "closed" && feeClosed}
-        view={{ pading: "10px 40px" }}
-      />
+      {status === "active" && (
+        <ButtonGradient
+          type="button"
+          text={status === "closed" && "Переглянути звіт"}
+          img={status === "active" ? feeActive : status === "closed" && feeClosed}
+          view={{ pading: "10px 40px" }}
+        />
+      )}
     </div>
   );
 };
