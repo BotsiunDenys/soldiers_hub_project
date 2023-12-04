@@ -43,30 +43,53 @@ const FeesList = ({ status, feeType, setModalVisible, setCurrentFee }) => {
 
   const allFees = { fees, volunteerFees, rebuildFees, militaryFees };
 
+  // function dateParse(fees) {
+  //   console.log("asd");
+  //   const dateNow = Date.now();
+  //   const year = dateNow.getFullYear();
+  //   const month = dateNow.getMonth();
+  //   const day = dateNow.getDay();
+  //   const feeYear = elem.finish.split(".")[2];
+  //   const feeMonth = elem.finish.split(".")[1];
+  //   const feeDay = elem.finish.split(".")[0];
+  //   return fees.map((elem) => {
+  //     if (year == feeYear && month == feeMonth && day == feeDay) {
+  //       return { ...elem, isClosed: true };
+  //     }
+  //     return { ...elem, isClosed: false };
+  //   });
+  // }
+
   useEffect(() => {
     switch (feeType) {
       case "military":
         if (allFees.militaryFees.length == 0) {
           dispatch(getMilitaryFees());
+          // allFees.militaryFees = dateParse(militaryFees);
         }
         break;
       case "volunteer":
         if (allFees.volunteerFees.length == 0) {
           dispatch(getVolunteersFees());
+          // allFees.volunteerFees = dateParse(volunteerFees);
         }
         break;
       case "rebuild":
         if (allFees.rebuildFees.length == 0) {
           dispatch(getRebuildingFees());
+          // allFees.rebuildFees = dateParse(rebuildFees);
         }
         break;
       default:
         if (allFees.fees.length == 0) {
           dispatch(getFees());
+          // allFees.fees = dateParse(fees);
         }
         break;
     }
   }, [feeType]);
+
+  console.log(allFees);
 
   return (
     <div className={styles.listContainer}>
@@ -75,10 +98,6 @@ const FeesList = ({ status, feeType, setModalVisible, setCurrentFee }) => {
             <FeesCard
               key={index}
               data={element}
-              // title={element.name}
-              // text={element.description}
-              // sum={element.sum}
-              // img={element?.image}
               status={status}
               setCurrentFee={setCurrentFee}
               setModalVisible={setModalVisible}
@@ -88,10 +107,6 @@ const FeesList = ({ status, feeType, setModalVisible, setCurrentFee }) => {
             <FeesCard
               key={index}
               data={element}
-              // title={element.name}
-              // text={element.description}
-              // sum={element.sum}
-              // img={element?.image}
               status={status}
               setCurrentFee={setCurrentFee}
               setModalVisible={setModalVisible}

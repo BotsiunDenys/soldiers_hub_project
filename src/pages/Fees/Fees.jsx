@@ -143,14 +143,14 @@ const Fees = () => {
               setCurrentFee={setCurrentFee}
             />
           </SpoilerFees>
-          <SpoilerFees title="Закриті">
+          {/* <SpoilerFees title="Закриті">
             <FeesList
               status="closed"
               feeType={feeType}
               setModalVisible={setIsVisible}
               setCurrentFee={setCurrentFee}
             />
-          </SpoilerFees>
+          </SpoilerFees> */}
           <ModalWindow isVisible={isVisible} setIsVisible={setIsVisible} currentFee={currentFee} />
         </div>
       </section>

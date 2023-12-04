@@ -3,7 +3,6 @@ import styles from "./FeesCard.module.scss";
 import feeActive from "../../assets/svg/donation-heart.svg";
 import feeClosed from "../../assets/svg/heart.svg";
 import test from "../../assets/test.jpg";
-import ModalWindow from "../modalWindow/modalWindow";
 
 const FeesCard = ({ data, status, setModalVisible, setCurrentFee }) => {
   return (
