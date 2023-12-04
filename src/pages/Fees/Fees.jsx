@@ -133,10 +133,10 @@ const Fees = () => {
             />
           </div>
           <SpoilerFees title="Активні">
-            <FeesList status="active" />
+            <FeesList status="active" feeType={feeType} />
           </SpoilerFees>
           <SpoilerFees title="Закриті">
-            <FeesList status="closed" />
+            <FeesList status="closed" feeType={feeType} />
           </SpoilerFees>
         </div>
       </section>

@@ -1,5 +1,13 @@
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getFees,
+  getMilitaryFees,
+  getRebuildingFees,
+  getVolunteersFees,
+} from "../../store/slices/FeeSlice";
 import FeesCard from "../FeesCard/FeesCard";
 import styles from "./FeesList.module.scss";
+import { useEffect } from "react";
 
 const data = [
   {
@@ -24,18 +32,65 @@ const data = [
   },
 ];
 
-const FeesList = ({ status }) => {
+const FeesList = ({ status, feeType }) => {
+  const dispatch = useDispatch();
+  const {
+    fees,
+    volunteersFees: volunteerFees,
+    rebuildingFees: rebuildFees,
+    militaryFees,
+  } = useSelector((state) => state.fees);
+
+  const allFees = { fees, volunteerFees, rebuildFees, militaryFees };
+
+  useEffect(() => {
+    switch (feeType) {
+      case "military":
+        if (allFees.militaryFees.length == 0) {
+          dispatch(getMilitaryFees());
+        }
+        break;
+      case "volunteer":
+        if (allFees.volunteerFees.length == 0) {
+          dispatch(getVolunteersFees());
+        }
+        break;
+      case "rebuild":
+        if (allFees.rebuildFees.length == 0) {
+          dispatch(getRebuildingFees());
+        }
+        break;
+      default:
+        if (allFees.fees.length == 0) {
+          dispatch(getFees());
+        }
+        break;
+    }
+  }, [feeType]);
+
   return (
     <div className={styles.listContainer}>
-      {data.map((element, index) => (
-        <FeesCard
-          key={index}
-          title={element.title}
-          text={element.text}
-          filled={element.filled}
-          status={status}
-        />
-      ))}
+      {feeType
+        ? allFees[`${feeType}Fees`].map((element, index) => (
+            <FeesCard
+              key={index}
+              title={element.name}
+              text={element.description}
+              sum={element.sum}
+              img={element?.image}
+              status={status}
+            />
+          ))
+        : allFees.fees.map((element, index) => (
+            <FeesCard
+              key={index}
+              title={element.name}
+              text={element.description}
+              sum={element.sum}
+              img={element?.image}
+              status={status}
+            />
+          ))}
     </div>
   );
 };
