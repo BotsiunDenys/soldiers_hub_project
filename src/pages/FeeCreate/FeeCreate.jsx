@@ -66,8 +66,8 @@ const FeeCreate = () => {
   const error = useSelector((state) => state.fees.error);
   const [validationError, setValidationError] = useState(false);
   const isLogged = useSelector((state) => state.auth.isLogged);
-  const [success, setSuccess] = useState("");
-  function handleFormSubmit(event) {
+  const success = useSelector((state) => state.fees.creationSuccess);
+  const handleFormSubmit = (event) => {
     event.preventDefault();
     if (isLogged) {
       if (
@@ -91,30 +91,24 @@ const FeeCreate = () => {
           isAccepted: false,
           image: data.image,
         };
-        const send = async () => {
-          await dispatch(createApplication(application));
-          if (!error) {
-            setSuccess("Заявку на створення збору успішно надіслано!");
-            setValidationError(false);
-            setData({
-              mail: "",
-              feeType: "",
-              feeName: "",
-              feeDescription: "",
-              requiredAmount: 0,
-              credentials: "",
-              image: "",
-            });
-          }
-        };
-        send();
+        dispatch(createApplication(application));
+        setValidationError(false);
+        setData({
+          mail: "",
+          feeType: "",
+          feeName: "",
+          feeDescription: "",
+          requiredAmount: 0,
+          credentials: "",
+          image: "",
+        });
       } else {
         setValidationError(true);
       }
     } else {
       navigate("/login");
     }
-  }
+  };
 
   function handleInputChange(e, name) {
     setData({ ...data, [name]: e.target.value });
@@ -245,7 +239,9 @@ const FeeCreate = () => {
             </div>
             {error && <p className={styles.error}>Сталась помилка. Спробуйте пізніше!</p>}
             {validationError && <p className={styles.error}>Заповніть усі поля!</p>}
-            {success && <p className={styles.success}>{success}</p>}
+            {success && (
+              <p className={styles.success}>Вашу заявку на створення збору успішно надіслано!</p>
+            )}
             {loading && <Loader />}
             <ButtonGradient
               type="submit"
