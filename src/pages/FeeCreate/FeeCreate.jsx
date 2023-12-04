@@ -64,6 +64,7 @@ const FeeCreate = () => {
   const navigate = useNavigate();
   const loading = useSelector((state) => state.fees.loading);
   const error = useSelector((state) => state.fees.error);
+  const [validationError, setValidationError] = useState(false);
   const isLogged = useSelector((state) => state.auth.isLogged);
   const [success, setSuccess] = useState("");
   function handleFormSubmit(event) {
@@ -94,6 +95,7 @@ const FeeCreate = () => {
           await dispatch(createApplication(application));
           if (!error) {
             setSuccess("Заявку на створення збору успішно надіслано!");
+            setValidationError(false);
             setData({
               mail: "",
               feeType: "",
@@ -106,6 +108,8 @@ const FeeCreate = () => {
           }
         };
         send();
+      } else {
+        setValidationError(true);
       }
     } else {
       navigate("/login");
@@ -240,6 +244,7 @@ const FeeCreate = () => {
               </label>
             </div>
             {error && <p className={styles.error}>Сталась помилка. Спробуйте пізніше!</p>}
+            {validationError && <p className={styles.error}>Заповніть усі поля!</p>}
             {success && <p className={styles.success}>{success}</p>}
             {loading && <Loader />}
             <ButtonGradient
