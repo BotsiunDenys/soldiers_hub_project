@@ -12,10 +12,13 @@ const initialAuthState = {
 };
 
 export const login = createAsyncThunk("auth/login", async ({ login, password }) => {
-  const response = await AuthService.login({ login, password });
-  localStorage.setItem("token", response.data.accessToken);
-  // console.log(response);
-  return response.data;
+  try {
+    const response = await AuthService.login({ login, password });
+    localStorage.setItem("token", response.data.accessToken);
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
 });
 
 export const logout = createAsyncThunk("auth/logout", async () => {
@@ -27,8 +30,12 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 export const registration = createAsyncThunk(
   "auth/registration",
   async ({ login, password, isAdmin }) => {
-    const response = await AuthService.registration({ login, password, isAdmin });
-    return response.data;
+    try {
+      const response = await AuthService.registration({ login, password, isAdmin });
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
   },
 );
 
@@ -42,24 +49,26 @@ export const checkAuth = createAsyncThunk("auth/checkAuth", async () => {
 const AuthSlice = createSlice({
   name: "auth",
   initialState: initialAuthState,
-  reducers: {},
+  reducers: {
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
       state.isLogged = false;
       state.loading = true;
     });
     builder.addCase(login.fulfilled, (state, action) => {
-      state.user = action.payload.user.login;
-      state.isAdmin = action.payload.user.isAdmin;
-      state.isLogged = true;
-      state.loading = false;
-    });
-    builder.addCase(login.rejected, (state, action) => {
-      state.isLogged = false;
-      state.loading = false;
-      if (action.error.message) {
-        state.error = action.error.message;
+      if (action.payload.message) {
+        state.error = action.payload.message;
+      } else {
+        state.user = action.payload.user.login;
+        state.isAdmin = action.payload.user.isAdmin;
+        state.isLogged = true;
+        state.error = "";
       }
+      state.loading = false;
     });
     builder.addCase(logout.pending, (state) => {
       state.isLogged = false;
@@ -82,17 +91,26 @@ const AuthSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(registration.fulfilled, (state, action) => {
-      state.user = action.payload.user.login;
-      state.isLogged = true;
-      state.loading = false;
-    });
-    builder.addCase(registration.rejected, (state, action) => {
-      state.isLogged = false;
-      state.loading = false;
-      if (action.error.message) {
-        state.error = action.error.message;
+      // state.user = action.payload.user.login;
+      // state.isLogged = true;
+      // state.loading = false;
+
+      if (action.payload.message) {
+        state.error = action.payload.message;
+      } else {
+        state.user = action.payload.user.login;
+        state.isLogged = true;
+        state.error = "";
       }
+      state.loading = false;
     });
+    // builder.addCase(registration.rejected, (state, action) => {
+    //   state.isLogged = false;
+    //   state.loading = false;
+    //   if (action.error.message) {
+    //     state.error = action.error.message;
+    //   }
+    // });
     builder.addCase(checkAuth.pending, (state) => {
       state.isLogged = false;
       state.loading = true;
@@ -114,3 +132,4 @@ const AuthSlice = createSlice({
 });
 
 export default AuthSlice.reducer;
+export const { setError } = AuthSlice.actions;
