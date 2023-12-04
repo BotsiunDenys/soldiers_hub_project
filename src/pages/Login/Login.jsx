@@ -12,7 +12,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogged = useSelector((state) => state.auth.isLogged);
-  const [data, setData] = useState({ login: "", password: "", remember: false });
+  const error = useSelector((state) => state.auth.error);
+  const [data, setData] = useState({ login: "", password: "" });
 
   useEffect(() => {
     if (isLogged) {
@@ -47,6 +48,9 @@ const Login = () => {
               placeholder="Логін"
               className={styles.input}
               value={data.login}
+              required
+              minLength={4}
+              maxLength={20}
               onChange={(e) => {
                 handleInputChange(e, "login");
               }}
@@ -56,6 +60,9 @@ const Login = () => {
               placeholder="Пароль"
               className={styles.input}
               value={data.password}
+              required
+              minLength={4}
+              maxLength={20}
               onChange={(e) => {
                 handleInputChange(e, "password");
               }}
@@ -71,6 +78,7 @@ const Login = () => {
               />
               Запам'ятати мене
             </label> */}
+            {error && <p className={styles.error}>{error}</p>}
             <ButtonGradient
               type="submit"
               img={heart}

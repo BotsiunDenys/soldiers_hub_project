@@ -79,9 +79,19 @@
       border: 2px solid #fff;
       border-radius: 8px;
 
+      &:invalid {
+        border-color: rgb(255, 0, 0, 0.5);
+      }
+
       &::placeholder {
         color: inherit;
       }
+    }
+
+    .error {
+      color: rgb(255, 255, 255);
+      font-weight: 500;
+      filter: drop-shadow(red 0px 0px 5px);
     }
   }
 

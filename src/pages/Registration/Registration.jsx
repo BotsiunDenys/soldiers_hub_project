@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registration } from "../../store/slices/AuthSlice";
+import { registration, setError } from "../../store/slices/AuthSlice";
 
 import styles from "./Registration.module.scss";
 import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
@@ -12,6 +12,7 @@ const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogged = useSelector((state) => state.auth.isLogged);
+  const error = useSelector((state) => state.auth.error);
   const [data, setData] = useState({ login: "", password: "", repeatPassword: "", isAdmin: false });
 
   useEffect(() => {
@@ -22,7 +23,11 @@ const Registration = () => {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    dispatch(registration(data));
+    if (data.password === data.repeatPassword) {
+      dispatch(registration(data));
+    } else {
+      dispatch(setError("Поле 'Пароль' та 'Повторіть пароль' не співпадають"));
+    }
   }
 
   function handleInputChange(e, name) {
@@ -43,6 +48,9 @@ const Registration = () => {
               placeholder="Логін"
               className={styles.input}
               value={data.login}
+              required
+              minLength={4}
+              maxLength={20}
               onChange={(e) => {
                 handleInputChange(e, "login");
               }}
@@ -52,6 +60,9 @@ const Registration = () => {
               placeholder="Пароль"
               className={styles.input}
               value={data.password}
+              required
+              minLength={4}
+              maxLength={20}
               onChange={(e) => {
                 handleInputChange(e, "password");
               }}
@@ -61,10 +72,14 @@ const Registration = () => {
               placeholder="Повторіть пароль"
               className={styles.input}
               value={data.repeatPassword}
+              required
+              minLength={4}
+              maxLength={20}
               onChange={(e) => {
                 handleInputChange(e, "repeatPassword");
               }}
             />
+            {error && <p className={styles.error}>{error}</p>}
             <ButtonGradient
               type="submit"
               img={heart}
