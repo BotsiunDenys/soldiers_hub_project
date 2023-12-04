@@ -37,7 +37,7 @@ export class FeeService {
   }
 
   static async createApplication(info) {
-    const data = await api.post("fee/createApplicatio", info);
+    const data = await api.post("fee/createApplication", info);
     return data;
   }
 }
