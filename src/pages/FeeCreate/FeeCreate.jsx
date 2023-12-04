@@ -65,7 +65,7 @@ const FeeCreate = () => {
   const loading = useSelector((state) => state.fees.loading);
   const error = useSelector((state) => state.fees.error);
   const isLogged = useSelector((state) => state.auth.isLogged);
-  console.log(error);
+  const [success, setSuccess] = useState("");
   function handleFormSubmit(event) {
     event.preventDefault();
     if (isLogged) {
@@ -93,6 +93,7 @@ const FeeCreate = () => {
         const send = async () => {
           await dispatch(createApplication(application));
           if (!error) {
+            setSuccess("Заявку на створення збору успішно надіслано!");
             setData({
               mail: "",
               feeType: "",
@@ -239,6 +240,7 @@ const FeeCreate = () => {
               </label>
             </div>
             {error && <p className={styles.error}>Сталась помилка. Спробуйте пізніше!</p>}
+            {success && <p className={styles.success}>{success}</p>}
             {loading && <Loader />}
             <ButtonGradient
               type="submit"
