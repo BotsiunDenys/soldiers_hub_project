@@ -4,6 +4,10 @@ import styles from "./Contacts.module.scss";
 import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
 import heart from "../../assets/svg/heart.svg";
 
+export const chat = "-1002084576911";
+export const id = "6912824537:AAHjw06OoPXDynn6JbPjMtkaYNfnP2AZQw0";
+const validateEmailRegex = /^\S+@\S+\.\S+$/;
+
 const Contacts = () => {
   const [data, setData] = useState({
     fullName: "",
@@ -12,15 +16,97 @@ const Contacts = () => {
     problemType: [],
     problemDescription: "",
   });
+  const [formResult, setFormResult] = useState({
+    text: "",
+    error: false,
+    nameError: false,
+    mailError: false,
+    descriptionError: false,
+  });
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log(data);
+    if (
+      data.fullName.length &&
+      validateEmailRegex.test(data.mail) &&
+      data.problemDescription.length
+    ) {
+      fetch(`https://api.telegram.org/bot${id}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: `Ім'я: ${data.fullName}\nEmail: ${data.mail}\nОпис: ${data.problemDescription}\n${
+            data.topic ? `Тема: ${data.topic}\n` : ""
+          }${data.problemType.length ? `Тип проблеми: ${data.problemType}` : ""}`,
+          chat_id: chat,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            handleClearForm({ text: "Ваша заявка надіслана. Дякую за звернення!", error: false });
+          } else {
+            handleClearForm({
+              text: "Помилка відправлення. Спробуйте пізніше.",
+              error: true,
+              nameError: false,
+              mailError: false,
+              descriptionError: false,
+            });
+          }
+        })
+        .catch(() => {
+          handleClearForm({
+            text: "Помилка відправлення. Спробуйте пізніше.",
+            error: true,
+            nameError: false,
+            mailError: false,
+            descriptionError: false,
+          });
+        });
+    } else {
+      if (!data.fullName.length) {
+        setFormResult({
+          text: "Поле ім'я не може бути пустим.",
+          error: true,
+          nameError: true,
+          mailError: false,
+          descriptionError: false,
+        });
+      } else if (!validateEmailRegex.test(data.mail)) {
+        setFormResult({
+          text: "Введіть валідну поштову адресу.",
+          error: true,
+          nameError: false,
+          mailError: true,
+          descriptionError: false,
+        });
+      } else if (!data.problemDescription.length) {
+        setFormResult({
+          text: "Опис проблеми не може бути пустим.",
+          error: true,
+          nameError: false,
+          mailError: false,
+          descriptionError: true,
+        });
+      }
+    }
   }
+
+  const handleClearForm = ({ text, error }) => {
+    setData({
+      fullName: "",
+      mail: "",
+      topic: "",
+      problemType: [],
+      problemDescription: "",
+    });
+    setFormResult({ text, error });
+  };
 
   function handleInputChange(e, name) {
     setData({ ...data, [name]: e.target.value });
-    console.log(data);
   }
 
   function handleCheckboxChange(e, name) {
@@ -33,7 +119,6 @@ const Contacts = () => {
     } else {
       setData({ ...data, [name]: [...data[name], value] });
     }
-    console.log(data);
   }
 
   return (
@@ -51,11 +136,11 @@ const Contacts = () => {
           <form className={styles.formContainer} onSubmit={handleFormSubmit}>
             <div className={styles.formGroup}>
               <label className={styles.label}>
-                ПІБ
+                ПІБ *
                 <input
                   type="text"
                   placeholder="Введіть ПІБ"
-                  className={styles.input}
+                  className={`${styles.input} ${formResult.nameError ? styles.errorInput : ""}`}
                   value={data.fullName}
                   onChange={(e) => {
                     handleInputChange(e, "fullName");
@@ -65,11 +150,11 @@ const Contacts = () => {
             </div>
             <div className={styles.formGroup}>
               <label className={styles.label}>
-                E-mail
+                E-mail *
                 <input
                   type="mail"
                   placeholder="Введіть e-mail"
-                  className={styles.input}
+                  className={`${styles.input} ${formResult.mailError ? styles.errorInput : ""}`}
                   value={data.mail}
                   onChange={(e) => {
                     handleInputChange(e, "mail");
@@ -92,7 +177,7 @@ const Contacts = () => {
               </label>
             </div>
             <div className={styles.formGroup}>
-              <p className={styles.label}>
+              <div className={styles.label}>
                 Виберіть тип проблеми
                 <div className={styles.checkboxGroup}>
                   <label className={styles.checkboxLabel}>
@@ -132,14 +217,16 @@ const Contacts = () => {
                     Індивідуальний
                   </label>
                 </div>
-              </p>
+              </div>
             </div>
             <div className={styles.formGroup}>
               <label className={styles.label}>
-                Опис проблеми
+                Опис проблеми *
                 <textarea
                   placeholder="Опишіть проблему"
-                  className={styles.text}
+                  className={`${styles.text} ${
+                    formResult.descriptionError ? styles.errorInput : ""
+                  }`}
                   value={data.problemDescription}
                   rows={5}
                   onChange={(e) => {
@@ -147,6 +234,9 @@ const Contacts = () => {
                   }}
                 />
               </label>
+            </div>
+            <div className={`${styles.formResult} ${formResult.error ? styles.error : ""}`}>
+              {formResult.text}
             </div>
             <ButtonGradient
               text="Відправити форму"

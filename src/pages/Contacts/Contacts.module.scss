@@ -1,17 +1,8 @@
 @use "../../utils/variables.scss";
 
-.main {
-}
-
 .introTitle {
   font-size: variables.$big-title-font-size;
   font-weight: 700;
-}
-
-.introSubtitle {
-}
-
-.feedback {
 }
 
 .feedbackContainer {
@@ -42,6 +33,10 @@
     &:focus {
       border-color: hsl(0, 0%, 70%);
     }
+  }
+
+  .errorInput {
+    border: 2px solid rgb(231, 66, 66);
   }
 
   .text {
@@ -133,4 +128,15 @@
       line-height: 24px;
     }
   }
+}
+
+.formResult {
+  font-size: 18px;
+  text-align: center;
+  font-weight: 500;
+  min-height: 20px;
+}
+
+.error {
+  color: rgb(231, 66, 66);
 }
