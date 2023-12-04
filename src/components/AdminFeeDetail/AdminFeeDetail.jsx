@@ -38,7 +38,7 @@ const AdminFeeDetail = ({ data }) => {
             Email: <span className={styles.text}>{data.email}</span>
           </p>
           <p className={styles.label}>
-            Тривалість збору: <span className={styles.text}>{data.date}</span>
+            Дата завершення: <span className={styles.text}>{data.finish}</span>
           </p>
         </div>
         <div className={styles.buttonsContainer}>
