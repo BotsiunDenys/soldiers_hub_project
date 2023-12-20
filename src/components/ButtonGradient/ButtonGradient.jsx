@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./ButtonGradient.module.scss";
 
-const ButtonGradient = ({ type, onClick, text, img, view, link }) => {
+const ButtonGradient = ({ type, onClick, text, img, view, link, isValid }) => {
   return type ? (
     type == "button" ? (
       <button
@@ -22,6 +22,7 @@ const ButtonGradient = ({ type, onClick, text, img, view, link }) => {
         }}
         className={styles.button}
         type="submit"
+        disabled={!isValid}
       >
         {!text ? "Підтримати" : text}
         <img src={img} />
