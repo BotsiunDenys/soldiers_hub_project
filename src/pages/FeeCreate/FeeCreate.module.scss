@@ -26,9 +26,8 @@
     width: 60%;
 
     .text,
-    .input,
-    .datePicker {
-      background-color: white;
+    .input {
+      background-color: transparent;
       padding: 10px;
       border: 2px solid #000;
       border-radius: 8px;
@@ -43,10 +42,6 @@
       &:focus {
         border-color: hsl(0, 0%, 70%);
       }
-    }
-
-    .datePicker {
-      cursor: pointer;
     }
 
     .label {
