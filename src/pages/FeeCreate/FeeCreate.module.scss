@@ -26,8 +26,7 @@
     width: 60%;
 
     .text,
-    .input,
-    .datePicker {
+    .input {
       background-color: transparent;
       padding: 10px;
       border: 2px solid #000;
@@ -35,14 +34,14 @@
       font-size: 20px;
       transition: all 0.2s ease-in-out;
 
+      &.inputError {
+        border-color: #bf1643;
+      }
+
       &:hover,
       &:focus {
         border-color: hsl(0, 0%, 70%);
       }
-    }
-
-    .datePicker {
-      cursor: pointer;
     }
 
     .label {
@@ -70,12 +69,12 @@
 .error {
   font-size: 18px;
   text-align: center;
-  font-weight: 500;
-  color: rgb(231, 66, 66);
+  font-weight: 600;
+  color: #bf1643;
 }
 
 .success {
   font-size: 18px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
 }

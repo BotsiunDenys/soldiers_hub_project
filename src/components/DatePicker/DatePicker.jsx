@@ -1,21 +1,16 @@
-import { useEffect, useState } from "react";
-import Datepicker from "react-datepicker";
-import styles from "../../pages/FeeCreate/FeeCreate.module.scss";
-import "react-datepicker/dist/react-datepicker.css";
+import Datepicker from "react-date-picker";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
+import "./DatePicker.scss";
 
-const DatePicker = ({ dateHandle }) => {
-  const [date, setDate] = useState(new Date());
-
-  useEffect(() => dateHandle(date));
-
+const DatePicker = ({ value, onChange, onBlur, isValid }) => {
   return (
     <Datepicker
-      onChange={(date) => setDate(date)}
-      className={styles.datePicker}
-      shouldCloseOnSelect={true}
-      selected={date}
-      dateFormat="dd/MM/yyyy"
-      id="datePicker"
+      onChange={onChange}
+      value={value}
+      onBlur={onBlur}
+      className={`${isValid && "isValid"}`}
+      // returnValue="start"
     />
   );
 };

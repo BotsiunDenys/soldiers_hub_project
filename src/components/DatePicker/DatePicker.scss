@@ -1,0 +1,63 @@
+.react-date-picker__wrapper {
+  border: 2px solid #000;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 20px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:focus-within {
+    border-color: hsl(0, 0%, 70%);
+  }
+}
+
+.isValid .react-date-picker__wrapper {
+  border-color: #bf1643;
+}
+
+.react-date-picker__calendar {
+  transition: all 1s ease-in-out;
+}
+
+.react-calendar {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  border-color: #f0f0f0;
+  box-shadow:
+    0px 0px 0px 1.5px hsl(0, 0%, 70%),
+    0px 0px 10px 1px hsl(0, 0%, 70%);
+
+  &__tile--now {
+    background-color: #1476d9;
+
+    &:enabled:hover,
+    &:enabled:focus {
+      background-color: #7abcff;
+    }
+  }
+
+  &__tile--active {
+    background-color: #acacac;
+
+    &:enabled:hover,
+    &:enabled:focus {
+      background-color: #747474;
+    }
+  }
+}
+
+.react-date-picker__button {
+  &__icon {
+    stroke: hsl(0, 0%, 70%);
+    fill: hsl(0, 0%, 70%);
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:enabled:hover .react-date-picker__button__icon {
+    stroke: #5c5c5c;
+  }
+
+  &:enabled:focus .react-date-picker__button__icon {
+    stroke: #484848;
+  }
+}
