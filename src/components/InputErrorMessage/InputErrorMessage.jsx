@@ -1,7 +1,7 @@
 import styles from "./InputErrorMessage.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 
-const InputErrorMessage = ({ children }) => {
+const InputErrorMessage = ({ children, isWhite }) => {
   return (
     <AnimatePresence>
       {children && (
@@ -22,6 +22,7 @@ const InputErrorMessage = ({ children }) => {
             },
           }}
           className={styles.errorMessage}
+          style={isWhite && { color: "#fff" }}
         >
           {children}
         </motion.p>
