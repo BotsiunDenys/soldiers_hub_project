@@ -224,13 +224,14 @@ const FeeCreate = () => {
                   className={`${styles.input} ${errors?.image && styles.inputError}`}
                   placeholder="Посилання на фото"
                   {...register("image", {
-                    required: "Поле обов'язкове до заповнення",
                     validate: async (value) => {
-                      const response = await fetch(value);
-                      console.log(response);
-                      console.log(errors);
-                      console.log(`${value}`);
-                      return response.status == 200 || "фів";
+                      const regex =
+                        /^((http|https|ftp):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i;
+                      if (regex.test(value)) {
+                        const response = await fetch(value);
+                        return response.status == 200 || "Ви повинні вказати URL-посилання на фото";
+                      }
+                      return "Ви повинні вказати URL-посилання на фото";
                     },
                   })}
                 />
