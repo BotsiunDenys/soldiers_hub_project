@@ -1,19 +1,27 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import { login } from "../../store/slices/AuthSlice";
 import styles from "./Login.module.scss";
 
 import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
+import InputErrorMessage from "../../components/InputErrorMessage/InputErrorMessage";
 import account from "../../assets/svg/big-account.svg";
 import heart from "../../assets/svg/heart.svg";
+import { modes } from "react-transition-group/SwitchTransition";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogged = useSelector((state) => state.auth.isLogged);
   const error = useSelector((state) => state.auth.error);
-  const [data, setData] = useState({ login: "", password: "" });
+
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({ mode: "onBlur", reValidateMode: "onBlur" });
 
   useEffect(() => {
     if (isLogged) {
@@ -21,17 +29,8 @@ const Login = () => {
     }
   }, [isLogged]);
 
-  function handleFormSubmit(event) {
-    event.preventDefault();
+  function handleFormSubmit(data) {
     dispatch(login(data));
-  }
-
-  function handleInputChange(e, name) {
-    setData({ ...data, [name]: e.target.value });
-  }
-
-  function handleCheckboxChange(e, name) {
-    setData({ ...data, [name]: e.target.checked });
   }
 
   return (
@@ -42,31 +41,33 @@ const Login = () => {
             <img src={account} />
           </div>
           <h2 className={styles.title}>Увійти</h2>
-          <form className={styles.formContainer} onSubmit={handleFormSubmit}>
-            <input
-              type="text"
-              placeholder="Логін"
-              className={styles.input}
-              value={data.login}
-              required
-              minLength={4}
-              maxLength={20}
-              onChange={(e) => {
-                handleInputChange(e, "login");
-              }}
-            />
-            <input
-              type="password"
-              placeholder="Пароль"
-              className={styles.input}
-              value={data.password}
-              required
-              minLength={4}
-              maxLength={20}
-              onChange={(e) => {
-                handleInputChange(e, "password");
-              }}
-            />
+          <form className={styles.formContainer} onSubmit={handleSubmit(handleFormSubmit)}>
+            <div className={styles.formGroup}>
+              <input
+                type="text"
+                placeholder="Логін"
+                className={`${styles.input} ${errors?.login && styles.inputError}`}
+                {...register("login", {
+                  required: "Поле обов'язкове до заповнення",
+                  minLength: { value: 4, message: "Логін не може бути меншим за 4 символи" },
+                  maxLength: { value: 20, message: "Логін не може бути більшим за 20 символів" },
+                })}
+              />
+              <InputErrorMessage isWhite>{errors?.login?.message}</InputErrorMessage>
+            </div>
+            <div className={styles.formGroup}>
+              <input
+                type="password"
+                placeholder="Пароль"
+                className={`${styles.input} ${errors?.password && styles.inputError}`}
+                {...register("password", {
+                  required: "Поле обов'язкове до заповнення",
+                  minLength: { value: 4, message: "Пароль не може бути меншим за 4 символи" },
+                  maxLength: { value: 20, message: "Пароль не може бути більшим за 20 символів" },
+                })}
+              />
+              <InputErrorMessage isWhite>{errors?.password?.message}</InputErrorMessage>
+            </div>
             {/* <label className={styles.checkboxLabel}>
               <input
                 type="checkbox"
@@ -84,10 +85,14 @@ const Login = () => {
               img={heart}
               text="Вхід"
               view={{ color: "#fff", fz: "30px", w: "227px", pading: "10px" }}
+              isValid={isValid}
             />
           </form>
           <p className={styles.text}>
-            Не маєте облікового запису? <Link to="../registration">Зареєструйтеся тут</Link>
+            Не маєте облікового запису?{" "}
+            <Link className={styles.textLink} to="../registration">
+              Зареєструйтеся тут
+            </Link>
           </p>
         </div>
       </section>

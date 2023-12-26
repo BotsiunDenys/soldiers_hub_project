@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
@@ -116,7 +115,6 @@ const FeeCreate = () => {
                   })}
                 />
               </label>
-              {console.log(errors)}
               <InputErrorMessage>{errors?.email?.message}</InputErrorMessage>
             </div>
             <div className={styles.formGroup}>
@@ -225,7 +223,16 @@ const FeeCreate = () => {
                   type="text"
                   className={`${styles.input} ${errors?.image && styles.inputError}`}
                   placeholder="Посилання на фото"
-                  {...register("image", { required: "Поле обов'язкове до заповнення" })}
+                  {...register("image", {
+                    required: "Поле обов'язкове до заповнення",
+                    validate: async (value) => {
+                      const response = await fetch(value);
+                      console.log(response);
+                      console.log(errors);
+                      console.log(`${value}`);
+                      return response.status == 200 || "фів";
+                    },
+                  })}
                 />
               </label>
               <InputErrorMessage>{errors?.image?.message}</InputErrorMessage>

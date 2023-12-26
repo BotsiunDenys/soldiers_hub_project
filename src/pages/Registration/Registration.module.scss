@@ -69,6 +69,10 @@
     row-gap: 35px;
     padding: 0 35px;
 
+    .formGroup {
+      width: 100%;
+    }
+
     .input {
       padding: 10px;
       font-size: 24px;
@@ -78,9 +82,20 @@
       background-color: transparent;
       border: 2px solid #fff;
       border-radius: 8px;
+      transition: all 0.2s ease-in-out;
 
-      &:invalid {
-        border-color: rgb(255, 0, 0, 0.5);
+      &.inputError {
+        border-color: #bf1643;
+      }
+
+      &:hover,
+      &:focus {
+        box-shadow: #fff 0px 0px 10px 1.5px;
+      }
+
+      &.inputError:hover,
+      &.inputError:focus {
+        box-shadow: #bf1643 0px 0px 10px 1.5px;
       }
 
       &::placeholder {
@@ -89,9 +104,17 @@
     }
 
     .error {
-      color: rgb(255, 255, 255);
+      color: #fff;
       font-weight: 500;
-      filter: drop-shadow(red 0px 0px 5px);
+      padding-left: 20px;
+      position: relative;
+
+      &::before {
+        content: "⚠";
+        color: #bf1643;
+        position: absolute;
+        left: 0;
+      }
     }
   }
 
