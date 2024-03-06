@@ -8,6 +8,7 @@ import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 import FeeCreate from "../pages/FeeCreate/FeeCreate";
 import AdminPanel from "../pages/AdminPanel/AdminPanel";
+import DonnuDefenders from "../pages/DonnuDefenders/DonnuDefenders";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "/admin",
         element: <AdminPanel />,
+      },
+      {
+        path: "/defenders",
+        element: <DonnuDefenders />,
       },
     ],
   },

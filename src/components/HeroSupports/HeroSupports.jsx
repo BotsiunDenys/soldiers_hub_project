@@ -8,14 +8,13 @@ const HeroSupports = () => {
     <section className={styles.support}>
       <div className={styles.supportContainer}>
         <div className={styles.textContainer}>
-          <span className={styles.text}>Підтримай</span>
-          <span className={styles.text}>Наших</span>
+          <span className={styles.text}>Захисники</span>
           <span>
             <img src={bigHeart} alt="big heart img" />
           </span>
-          <span className={styles.text}>Героїв</span>
+          <span className={styles.text}>Донну</span>
         </div>
-        <ButtonGradient img={heart} view={{ fz: "40px" }} />
+        <ButtonGradient img={heart} view={{ fz: "40px" }} text="Переглянути" link="/defenders" />
       </div>
     </section>
   );

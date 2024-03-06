@@ -26,6 +26,11 @@ export class FeeService {
     return data;
   }
 
+  static async getDonnuFees() {
+    const data = await api.get("fee/getDonnuFees");
+    return data;
+  }
+
   static async acceptApplication(id) {
     const data = await api.put(`fee/acceptApplication/${id}`);
     return data;

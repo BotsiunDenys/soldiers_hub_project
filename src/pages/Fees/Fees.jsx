@@ -20,6 +20,7 @@ const options = [
   { value: "military", label: "Військовий" },
   { value: "volunteer", label: "Волонтерський" },
   { value: "rebuild", label: "На відбудову" },
+  { value: "donnu", label: "Збори від донну" },
 ];
 
 const selectStyles = {
