@@ -201,15 +201,18 @@ const FeeCreate = () => {
                   className={`${styles.input} ${errors?.requisite && styles.inputError}`}
                   {...register("requisite", {
                     required: "Поле обов'язкове до заповнення",
-                    validate: async (value) => {
-                      console.log(value);
-                      const regex = /^https:\/\/send\.monobank\.ua\/jar\/.*$/;
-                      if (regex.test(value)) {
-                        const response = await fetch(value);
-                        return response.status == 200 || "Перевірте правильність введених даних";
-                      }
-                      return "Ви повинні вказати URL-посилання на банку";
+                    pattern: {
+                      value: /^https:\/\/send\.monobank\.ua\/jar\/.*$/,
+                      message: "Ви повинні вказати URL-посилання на банку",
                     },
+                    // validate: async (value) => {
+                    //   const regex = /^https:\/\/send\.monobank\.ua\/jar\/.*$/;
+                    //   if (regex.test(value)) {
+                    //     const response = await fetch(value);
+                    //     return response.status == 200 || "Перевірте правильність введених даних";
+                    //   }
+                    //   return "Ви повинні вказати URL-посилання на банку";
+                    // },
                   })}
                 />
               </label>
@@ -242,15 +245,21 @@ const FeeCreate = () => {
                   className={`${styles.input} ${errors?.image && styles.inputError}`}
                   placeholder="Посилання на фото"
                   {...register("image", {
-                    validate: async (value) => {
-                      const regex =
-                        /^((http|https|ftp):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i;
-                      if (regex.test(value)) {
-                        const response = await fetch(value);
-                        return response.status == 200 || "Ви повинні вказати URL-посилання на фото";
-                      }
-                      return "Ви повинні вказати URL-посилання на фото";
+                    pattern: {
+                      value:
+                        /^((http|https|ftp):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i,
+                      message: "Ви повинні вказати URL-посилання на фото",
                     },
+                    // validate: async (value) => {
+                    //   const regex =
+                    //     /^((http|https|ftp):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i;
+                    //   if (regex.test(value)) {
+                    //     const response = await fetch(value);
+                    //     return response.status == 200 || "Ви повинні вказати URL-посилання на фото";
+                    //   }
+                    //   return "Ви повинні вказати URL-посилання на фото";
+                    // },
+                    value,
                   })}
                 />
               </label>
