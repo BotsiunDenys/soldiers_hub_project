@@ -31,12 +31,13 @@
     align-items: center;
 
     padding: 6px 30px;
-    background-color: #fff;
+    background: variables.$footer-background;
     border-radius: 8px 8px 0 0;
 
     .headingTitle {
       font-size: variables.$titles-font-size;
       font-weight: 700;
+      color: #fff;
     }
   }
 }

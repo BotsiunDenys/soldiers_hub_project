@@ -14,7 +14,7 @@
   border-radius: 6px;
   max-width: 80%;
   max-height: 900px;
-  overflow-y: scroll;
+  overflow-y: auto;
   background: #e8e8e8;
   &_header {
     font-size: $main-fonts-size;

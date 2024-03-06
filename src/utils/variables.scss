@@ -4,8 +4,9 @@ $main-font: "Comfortaa", sans-serif;
 
 // $text-color: #000;
 $body-background: #f0f0f0;
-$footer-background: rgba(163, 168, 178, 0.6);
-$copyright-background: rgb(80, 80, 80);
+// $footer-background: rgba(163, 168, 178, 0.6);
+$footer-background: linear-gradient(#1d6cb4, #203464);
+$copyright-background: linear-gradient(#10192f, #192649);
 $main-fonts-size: 20px;
 $titles-font-size: 22px;
 $subtitles-font-size: 18px;

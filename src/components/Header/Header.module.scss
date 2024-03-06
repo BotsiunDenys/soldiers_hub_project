@@ -1,7 +1,7 @@
 @use "../../utils/variables.scss" as *;
 
 .header {
-  background-color: #fff;
+  background: linear-gradient(#203463, #1d6db5);
 
   .container {
     max-width: 1462px;
@@ -22,6 +22,7 @@
       &List {
         display: flex;
         column-gap: 30px;
+        color: #fff;
       }
     }
 
@@ -36,6 +37,7 @@
         .action {
           position: relative;
           padding: 10px;
+          color: #fff;
 
           &:first-child::before {
             content: "";
@@ -45,7 +47,7 @@
             transform: translateX(100%);
             width: 1px;
             height: 100%;
-            background-color: #000;
+            background-color: #fff;
           }
         }
       }
@@ -55,11 +57,13 @@
       }
 
       .logoutImg {
+        color: #fff;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
-        &:hover {
-          color: #969696;
-        }
+        margin-left: 10px;
+        // &:hover {
+        //   color: #969696;
+        // }
       }
 
       .actionsImg {

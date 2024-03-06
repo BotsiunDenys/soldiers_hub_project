@@ -33,7 +33,7 @@ const selectStyles = {
     boxShadow: "none",
     "&:hover": {
       border: "none",
-      color: "#f0f0f0",
+      color: "#f0f0ff",
     },
     "&:focus": {
       border: "none",
@@ -42,27 +42,32 @@ const selectStyles = {
   }),
   placeholder: (styles) => ({
     ...styles,
-    color: "black",
+    color: "white",
     "&:hover": {
-      color: "#969696",
+      color: "#dadada",
     },
     "&:focus": {
-      color: "#969696",
+      color: "#dadada",
     },
+  }),
+  singleValue: (styles) => ({
+    ...styles,
+    color: "white",
   }),
   menu: (styles) => ({
     ...styles,
     width: "fit-content",
     borderRadius: "5px",
+    backgroundColor: "#203260",
   }),
   option: (styles, { isFocused, isSelected }) => ({
     ...styles,
-    color: "black",
-    backgroundColor: isFocused ? "hsl(0, 0%, 85%)" : isSelected && "hsl(0, 0%, 70%)",
+    color: "white",
+    backgroundColor: isFocused ? "#213976" : isSelected && "#264185",
     transition: "all 0.2s ease-in-out",
 
     "&:active": {
-      backgroundColor: "hsl(0, 0%, 70%)",
+      backgroundColor: "#264185",
     },
   }),
   indicatorSeparator: (styles) => ({
@@ -71,17 +76,17 @@ const selectStyles = {
   }),
   dropdownIndicator: (styles) => ({
     ...styles,
-    color: "black",
+    color: "white",
   }),
 };
 
 const Fees = () => {
   const [feeType, setFeeType] = useState("");
   const dispatch = useDispatch();
-  const fees = useSelector((state) => state.fees.fees);
-  const militaryFees = useSelector((state) => state.fees.militaryFees);
-  const volutneersFees = useSelector((state) => state.fees.volutneersFees);
-  const rebuildingFees = useSelector((state) => state.fees.rebuildingFees);
+  // const fees = useSelector((state) => state.fees.fees);
+  // const militaryFees = useSelector((state) => state.fees.militaryFees);
+  // const volutneersFees = useSelector((state) => state.fees.volutneersFees);
+  // const rebuildingFees = useSelector((state) => state.fees.rebuildingFees);
   const [isVisible, setIsVisible] = useState(false);
   const [currentFee, setCurrentFee] = useState({});
 
@@ -89,21 +94,21 @@ const Fees = () => {
     setFeeType(selectedOption.value);
   };
 
-  const handleGetFees = () => {
-    dispatch(getFees());
-  };
+  // const handleGetFees = () => {
+  //   dispatch(getFees());
+  // };
 
-  const handleGetMilitaryFees = () => {
-    dispatch(getMilitaryFees());
-  };
+  // const handleGetMilitaryFees = () => {
+  //   dispatch(getMilitaryFees());
+  // };
 
-  const handleGetVolunteerFees = () => {
-    dispatch(getVolunteersFees());
-  };
+  // const handleGetVolunteerFees = () => {
+  //   dispatch(getVolunteersFees());
+  // };
 
-  const handleGetRebuildingFees = () => {
-    dispatch(getRebuildingFees());
-  };
+  // const handleGetRebuildingFees = () => {
+  //   dispatch(getRebuildingFees());
+  // };
 
   return (
     <main className={styles.main}>
