@@ -53,6 +53,8 @@ const FeeCreate = () => {
     }),
   };
 
+  const regex = /^[a-zA-Z0-9._%+-]+@donnu\.edu\.ua$/;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loading = useSelector((state) => state.fees.loading);
@@ -62,7 +64,12 @@ const FeeCreate = () => {
 
   const handleFormSubmit = (data) => {
     if (isLogged) {
-      const application = { ...data, date: Date.parse(data.date), isAccepted: false };
+      const application = {
+        ...data,
+        date: Date.parse(data.date),
+        isAccepted: false,
+        feeByDonnu: regex.test(data.email),
+      };
       dispatch(createApplication(application));
       reset();
     } else {
@@ -109,7 +116,7 @@ const FeeCreate = () => {
                     required: "Поле обов'язкове до заповнення",
                     minLength: { value: 8, message: "E-mail повинен бути більше 8 символів" },
                     pattern: {
-                      value: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/,
+                      value: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                       message: "Перевірте правильність введеного e-mail",
                     },
                   })}
@@ -190,9 +197,20 @@ const FeeCreate = () => {
                 Реквізити
                 <input
                   type="text"
-                  placeholder="Введіть номер банківської картки"
+                  placeholder="Введіть посилання на банку(монобанк)"
                   className={`${styles.input} ${errors?.requisite && styles.inputError}`}
-                  {...register("requisite", { required: "Поле обов'язкове до заповнення" })}
+                  {...register("requisite", {
+                    required: "Поле обов'язкове до заповнення",
+                    validate: async (value) => {
+                      console.log(value);
+                      const regex = /^https:\/\/send\.monobank\.ua\/jar\/.*$/;
+                      if (regex.test(value)) {
+                        const response = await fetch(value);
+                        return response.status == 200 || "Перевірте правильність введених даних";
+                      }
+                      return "Ви повинні вказати URL-посилання на банку";
+                    },
+                  })}
                 />
               </label>
               <InputErrorMessage>{errors?.requisite?.message}</InputErrorMessage>

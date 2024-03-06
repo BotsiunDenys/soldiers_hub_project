@@ -9,7 +9,7 @@
   }
 
   .footerMain {
-    background-color: variables.$footer-background;
+    background: variables.$footer-background;
     padding: 40px 0;
 
     .footerContainer {
@@ -17,6 +17,7 @@
       justify-content: space-evenly;
 
       .footerContent {
+        color: #fff;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -27,6 +28,7 @@
         display: grid;
         grid-template-columns: repeat(2, 195px);
         row-gap: 35px;
+        color: #fff;
 
         .footerTitle {
           font-weight: 700;
@@ -42,6 +44,7 @@
       }
 
       .footerMail {
+        color: #fff;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
@@ -63,7 +66,7 @@
             justify-content: center;
             width: 30px;
             height: 30px;
-            background-color: #363636;
+            background-color: #253155;
             border-radius: 50%;
 
             > img {
@@ -77,10 +80,11 @@
   }
 
   .footerCopyright {
-    background-color: variables.$copyright-background;
+    background: variables.$copyright-background;
     padding: 20px 0;
 
     .copyrightContent {
+      color: #fff;
       text-align: center;
       font-size: variables.$small-font;
     }

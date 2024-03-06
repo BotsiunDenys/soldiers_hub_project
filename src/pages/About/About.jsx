@@ -113,7 +113,6 @@ const About = () => {
           </div>
         </div>
       </section>
-      <HeroSupports />
     </main>
   );
 };
