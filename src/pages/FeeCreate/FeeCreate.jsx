@@ -62,20 +62,44 @@ const FeeCreate = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
   const success = useSelector((state) => state.fees.creationSuccess);
 
-  const handleFormSubmit = (data) => {
+  const convertToBase64 = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    const data = new Promise((resolve, reject) => {
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+    });
+    return data;
+  };
+
+  const handleFormSubmit = async (data) => {
+    // let application = new FormData();
+    // application.append("image", await convertToBase64(data.image[0]));
+    // application.append("isAccepted", false);
+
     if (isLogged) {
       const application = {
         ...data,
-        date: Date.parse(data.date),
+        date: Date.parse(data.finish),
         isAccepted: false,
         feeByDonnu: regex.test(data.email),
+        image: await convertToBase64(data.image[0]),
       };
       dispatch(createApplication(application));
-      reset();
+      console.log(application);
+      // reset();
     } else {
       navigate("/login");
     }
-    reset();
+    // reset();
+    // const application = {
+    //   ...data,
+    //   date: Date.parse(data.date),
+    //   isAccepted: false,
+    //   feeByDonnu: regex.test(data.email),
+    //   image: await convertToBase64(data.image[0]),
+    // };
+    // console.log(application);
   };
 
   const {
@@ -241,15 +265,11 @@ const FeeCreate = () => {
               <label className={styles.label}>
                 Фото збору
                 <input
-                  type="text"
-                  className={`${styles.input} ${errors?.image && styles.inputError}`}
-                  placeholder="Посилання на фото"
+                  type="file"
+                  accept="image/*"
+                  // className={`${styles.input} ${errors?.image && styles.inputError}`}
                   {...register("image", {
-                    pattern: {
-                      value:
-                        /^((http|https|ftp):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i,
-                      message: "Ви повинні вказати URL-посилання на фото",
-                    },
+                    required: "Виберіть фото для збору",
                     // validate: async (value) => {
                     //   const regex =
                     //     /^((http|https|ftp):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i;
