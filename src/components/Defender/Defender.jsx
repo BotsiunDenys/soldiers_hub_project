@@ -65,7 +65,7 @@ const Defender = ({ data, dead }) => {
           <div className={styles.defenderImage}>
             <img src={`data:image/jpg;base64,${convertedImgSrc}`} alt="defender`s photo" />
           </div>
-          <p className={styles.text}>{`${birth} - ${death}`}</p>
+          {data?.birthDate && <p className={styles.text}>{`${birth} - ${death}`}</p>}
           <p className={styles.text}>{`${data.bio}`}</p>
         </div>
       </ModalWindowUniversal>
