@@ -1,19 +1,37 @@
 @use "../../utils/variables.scss";
 
-.introTitle {
-  font-size: variables.$big-title-font-size;
-  font-weight: 700;
-  letter-spacing: 1.32px;
-}
+.galleryItemAdd {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.createFee {
-  margin-bottom: 130px;
-}
+  transition: all 0.3s ease;
+  border: 2px dashed hsl(0, 0%, 70%);
 
-.createFeeContainer {
-  max-width: 1462px;
-  padding: 60px 15px 0;
-  margin: 0 auto;
+  &:hover {
+    border-radius: 10px;
+    border-color: black;
+
+    & > svg {
+      transform: scale(1.1);
+    }
+
+    & path {
+      fill: black;
+    }
+  }
+
+  & > svg {
+    width: 50%;
+    height: 50%;
+    transition: all 0.3s ease;
+
+    & > path {
+      transition: all 0.3s ease;
+      fill: hsl(0, 0%, 70%);
+    }
+  }
 }
 
 .formContainer {
@@ -21,9 +39,10 @@
   flex-direction: column;
   align-items: center;
   row-gap: 55px;
+  min-width: 700px;
 
   .formGroup {
-    width: 60%;
+    width: 80%;
 
     input[type="file"] {
       width: 0px;
@@ -34,7 +53,6 @@
       resize: none;
     }
 
-    .text,
     .input,
     .upload {
       background-color: transparent;
@@ -58,12 +76,16 @@
       display: grid;
       place-content: center;
 
-      & > svg {
+      & > svg,
+      & > svg > path {
         transition: all 0.2s ease-in-out;
       }
 
-      &:hover > svg {
+      &:hover > svg > path {
         fill: hsl(0, 0%, 70%);
+      }
+
+      &:hover > svg {
         animation: jumpy 0.7s ease;
       }
     }
@@ -75,32 +97,18 @@
       flex-direction: column;
       row-gap: 5px;
     }
+  }
 
-    .text {
-      resize: none;
+  .dateWrapper {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+
+    & > .formGroup {
+      width: auto;
     }
   }
-
-  input[type="number"]:hover::-webkit-inner-spin-button,
-  input[type="number"]:hover::-webkit-outer-spin-button,
-  input[type="number"]:focus::-webkit-inner-spin-button,
-  input[type="number"]:focus::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-}
-
-.error {
-  font-size: 18px;
-  text-align: center;
-  font-weight: 600;
-  color: #bf1643;
-}
-
-.success {
-  font-size: 18px;
-  text-align: center;
-  font-weight: 600;
 }
 
 @keyframes jumpy {

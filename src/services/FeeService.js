@@ -42,11 +42,9 @@ export class FeeService {
   }
 
   static async createApplication(info) {
-    const data = await api.post("fee/createApplication", info);
+    const data = await api.post("fee/createApplication", info, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
     return data;
   }
 }
-
-// , {
-//   headers: { "Content-Type": "multipart/form-data" },
-// }

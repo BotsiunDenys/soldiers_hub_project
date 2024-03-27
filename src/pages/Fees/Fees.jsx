@@ -82,7 +82,7 @@ const selectStyles = {
 };
 
 const Fees = () => {
-  const [feeType, setFeeType] = useState("");
+  const [feeType, setFeeType] = useState("donnu");
   const dispatch = useDispatch();
   // const fees = useSelector((state) => state.fees.fees);
   // const militaryFees = useSelector((state) => state.fees.militaryFees);

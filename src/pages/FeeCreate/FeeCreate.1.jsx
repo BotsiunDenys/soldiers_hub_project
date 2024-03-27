@@ -1,27 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
 import styles from "./FeeCreate.module.scss";
-
 import Intro from "../../components/Intro/Intro";
 import ButtonGradient from "../../components/ButtonGradient/ButtonGradient";
 import Loader from "../../components/Loader/Loader";
-
 import img from "../../assets/svg/heart.svg";
 import { createApplication } from "../../store/slices/FeeSlice";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import InputErrorMessage from "../../components/InputErrorMessage/InputErrorMessage";
 import { FaUpload, FaCheck } from "react-icons/fa6";
+import { options } from "./FeeCreate";
 
-const options = [
-  { value: "military", label: "Військовий" },
-  { value: "volunteer", label: "Волонтерський" },
-  { value: "rebuild", label: "На відбудову" },
-];
-
-const FeeCreate = () => {
+export const FeeCreate = () => {
   const selectStyles = {
     control: (styles, { menuIsOpen }) => ({
       ...styles,
@@ -73,7 +65,6 @@ const FeeCreate = () => {
       //   feeByDonnu: regex.test(data.email),
       //   // image: await convertToBase64(data.image[0]),
       // };
-
       const application = new FormData();
       application.append("image", data.image[0]);
       application.append("isAccepted", false);
@@ -103,8 +94,6 @@ const FeeCreate = () => {
     reValidateMode: "onBlur",
   });
 
-  // console.log("validation");
-  // console.log(errors.image);
   console.log(getValues("image"));
 
   return (
@@ -259,7 +248,9 @@ const FeeCreate = () => {
               <label className={styles.label}>
                 Фото збору
                 <div className={`${styles.upload} ${errors?.image && styles.inputError}`}>
-                  {getValues("image")?.length > 0 ? <FaCheck /> : <FaUpload />}
+                  {/* {getValues("image") ? "image yes" : "no"} */}
+                  <FaUpload />
+                  <FaCheck />
                   <input
                     type="file"
                     accept="image/*"
@@ -289,5 +280,3 @@ const FeeCreate = () => {
     </main>
   );
 };
-
-export default FeeCreate;

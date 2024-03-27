@@ -5,6 +5,18 @@ import feeClosed from "../../assets/svg/heart.svg";
 import test from "../../assets/test.jpg";
 
 const FeesCard = ({ data, status, setModalVisible, setCurrentFee }) => {
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  };
+
+  const convertedImgSrc = arrayBufferToBase64(data.imageSrc.data);
+
   return (
     <div className={styles.cardContainer}>
       <div className={styles.content}>
@@ -15,7 +27,7 @@ const FeesCard = ({ data, status, setModalVisible, setCurrentFee }) => {
               : status === "closed" && styles.imgContainerClosed
           }
         >
-          <img src={data.image ? data.image : test} />
+          <img src={data.imageSrc ? `data:image/jpg;base64,${convertedImgSrc}` : test} />
         </div>
         <h3 className={styles.title}>{data.name}</h3>
         <p className={styles.text}>{data.description}</p>

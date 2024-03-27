@@ -9,6 +9,7 @@ import Registration from "../pages/Registration/Registration";
 import FeeCreate from "../pages/FeeCreate/FeeCreate";
 import AdminPanel from "../pages/AdminPanel/AdminPanel";
 import DonnuDefenders from "../pages/DonnuDefenders/DonnuDefenders";
+import DonnuFallenDefenders from "../pages/DonnuFallenDefenders/DonnuFallenDefenders";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/defenders",
         element: <DonnuDefenders />,
+      },
+      {
+        path: "/fallendefenders",
+        element: <DonnuFallenDefenders />,
       },
     ],
   },

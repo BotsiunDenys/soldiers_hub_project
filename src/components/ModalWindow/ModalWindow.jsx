@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { IoClose } from "react-icons/io5";
 import styles from "./ModalWindow.module.scss";
-import { current } from "immer";
 
 const ModalWindow = ({ isVisible, setIsVisible, currentFee }) => {
   return (

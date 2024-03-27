@@ -97,6 +97,10 @@ body {
   background-color: variables.$body-background;
 }
 
+.lock {
+  overflow: hidden;
+}
+
 #root {
   display: grid;
   min-height: 100vh;
